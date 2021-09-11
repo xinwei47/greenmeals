@@ -1,0 +1,78 @@
+.head-container {
+    width: 70%;
+
+    &--navi {
+        width: 100%;
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        align-items: center;
+        background-color: yellowgreen;
+        padding: $padding-sm $padding-sm $padding-xs $padding-sm;
+    }
+}
+.app-text {
+    &__heading {
+        line-height: 1;
+
+        &--navi {
+            font-size: 3.2rem;
+            transform: translateY(-1rem);
+            margin-right: $margin-md;
+        }
+    }
+
+    &__period {
+        color: $color-highlight;
+    }
+
+    &__intro {
+        margin: $margin-sm 0 $margin-md 0;
+        line-height: 1.2;
+    }
+}
+
+.hide {
+    color: #55a630;
+    font-weight: 400;
+    margin: $margin-sm 0 $margin-xs 0;
+
+    &__icon {
+        font-size: 3rem;
+
+        &--expand {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+.results-container {
+    max-width: 114rem;
+    padding: 0 $padding-sm;
+    margin: 0 auto;
+}
+
+.results-content {
+    display: grid;
+    grid-template-columns: minmax(0, min-content) minmax(0, 1fr);
+
+    &--collapse {
+        grid-template-columns: minmax(0, 1fr);
+
+        & .recipe {
+            padding: 0;
+        }
+    }
+}
+
+.search-results {
+    padding-right: 1.5rem;
+    max-height: 80vh;
+    overflow: scroll;
+}
+
+.recipe {
+    padding-left: $padding-sm;
+    padding-right: 1.5rem;
+    max-height: 80vh;
+    overflow: scroll;
+}

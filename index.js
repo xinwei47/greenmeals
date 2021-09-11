@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import ejsMate from 'ejs-mate';
+import path from 'path';
+
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import flash from 'connect-flash';
@@ -7,9 +10,6 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo'; // create a MongoDB store for express session data rather than using the memory by default
 
 import connectDB from './config/mongodb.js';
-import loginScreen from './views/users/login.js';
-import registerScreen from './views/users/register.js';
-import homeScreen from './views/home.js';
 import User from './models/users.js';
 
 dotenv.config();
@@ -17,15 +17,25 @@ connectDB();
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true })); // parse req.body
+// set up ejs template engine
+const __dirname = path.dirname(new URL(import.meta.url).pathname); // __dirname is not defined in ES module scope
+app.engine('ejs', ejsMate);
+app.set('views', path.join(__dirname + '/views'));
+app.set('view engine', 'ejs')
 
-// set up passport
+// parse req.body
+app.use(express.urlencoded({ extended: true }));
+
+// serve static assets folder. Then link the stylesheets to corresponding folder location
+app.use(express.static(path.join(__dirname, 'public')));
+
+// set up passport, passport-local
 app.use(passport.initialize()); // 'passport.initializer()' middleware is required to initialize passport in an Express-based app
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()) // 'serialization' tells how to store the data in a session
 passport.deserializeUser(User.deserializeUser()) // 'deserialization' tells how to un-store the data in a session
 
-// create session
+// set up session
 // create a session store for session data
 // configure cookie
 const secret = process.env.SECRET;
@@ -55,12 +65,12 @@ app.use((req, res, next) => {
 
 // homepage
 app.get('/', (req, res) => {
-    res.send(homeScreen());
+    res.render('home');
 })
 
 // render register page
 app.get('/register', async (req, res) => {
-    res.send(registerScreen());
+    res.render('users/register');
 })
 
 // register user
@@ -91,7 +101,7 @@ app.post('/register', async (req, res) => {
 
 // render login page
 app.get('/login', (req, res) => {
-    res.send(loginScreen());
+    res.render('users/login');
 })
 
 // log user in
@@ -99,7 +109,6 @@ app.get('/login', (req, res) => {
 app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Login successfully');
     res.redirect('/');
-    console.log(success);
 })
 
 
