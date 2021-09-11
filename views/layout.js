@@ -1,4 +1,4 @@
-const layout = (content) => {
+const layout = ({ content, flash }) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -9,6 +9,7 @@ const layout = (content) => {
         </head>
 
         <body>
+            ${flash}
             ${content}
         </body>
     </html>
