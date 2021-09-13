@@ -1,0 +1,45 @@
+.nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $padding-sm $padding-md;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    // nav logo
+    &__logo {
+
+    }
+
+    // nav menu
+    &__menu {
+        list-style: none;
+
+        display: flex;
+        
+    }
+
+    &__item {
+        &:not(:last-child){
+            margin-right: $margin-md;
+        }
+    }
+    
+    &__link {
+        &,
+        &:link,
+        &:visited {
+            text-decoration: none;
+            color: $color-black;
+            font-weight: 500;
+        }
+
+        &:hover {
+            color: $color-highlight;
+        }
+
+    }
+}

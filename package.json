@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "watch:sass": "sass sass/main.scss public/css/style.css -w",
-    "script:js": "nodemon index.js",
-    "dev": "npm-run-all --parallel watch:sass script:js",
+    "watch:sass": "sass public/sass/main.scss public/css/style.css -w",
+    "server:js": "nodemon server.js",
+    "dev": "npm-run-all --parallel watch:sass server:js",
     "compile:sass": "sass sass/main.scss css/style.comp.css",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.comp.css -o css/style.prefix.css",
     "compress:css": "sass css/style.prefix.css css/style.css --style compressed",

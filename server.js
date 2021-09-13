@@ -27,7 +27,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }));
 
 // serve static assets folder. Then link the stylesheets to corresponding folder location
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname + '/public')));
 
 // set up passport, passport-local
 app.use(passport.initialize()); // 'passport.initializer()' middleware is required to initialize passport in an Express-based app

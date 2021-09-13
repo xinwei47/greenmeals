@@ -1,0 +1,22 @@
+.logo {
+    &__link {
+        &,
+        &:link,
+        &:visited {
+            text-decoration: none;
+        }
+    }
+
+    &__text {
+        font-size: 2.4rem;
+        font-weight: 600;
+
+        &--1 {
+            color: $color-white;
+        }
+
+        &--2 {
+            color: $color-highlight;
+        }
+    }
+}
