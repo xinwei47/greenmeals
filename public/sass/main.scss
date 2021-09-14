@@ -9,11 +9,15 @@
 @import "components/card";
 @import "components/recipe";
 @import "components/loader";
-@import "components/navbar";
 @import "components/logo";
+@import "components/flash";
+@import "components/form";
 
 @import "layout/footer";
 @import "layout/header";
-@import "layout/navigation";
+@import "layout/navbar";
+@import "layout/boilerplate";
 
 @import "pages/home";
+@import "pages/login";
+@import "pages/register";

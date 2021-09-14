@@ -1,0 +1,36 @@
+.flash {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding-xs;
+
+    border-radius: 4px;
+    margin-bottom: $margin-md;
+    box-shadow: $box-shadow;
+
+    &--success {
+        background: rgba($color-highlight, 0.8);
+    }
+
+    &--error {
+        background: $color-highlight-error;
+    }
+
+    &__msg {
+        color: $color-white;
+    }
+
+    &__text-icon {
+    }
+
+    &__btn {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+    }
+
+    &__btn-icon {
+        color: $color-white;
+        font-size: 2rem;
+    }
+}

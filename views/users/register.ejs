@@ -1,10 +1,24 @@
 <% layout('layouts/boilerplate') %>
 
-<h2>Register</h2>
-<form action="" method="POST">
-    <input type="text" placeholder="Username" name="username" id="username"></input>
-    <input type="text" placeholder="Email" name="email" id="email">
-    <input type="text" placeholder="Password" name="password" id="password">
-    <input type="text" placeholder="Confirm Password" name="confirmPassword" id="confirm-password">
-    <input type="submit" value="Register">
+<form action="" method="POST" class="form">
+    <h1 class="form__title center-element">Register</h1>
+    <div class="form__group">
+        <label class="form__label" for="username">Username</label>
+        <input class="form__input" type="text" name="username" id="username"></input>
+    </div>
+    <div class="form__group">
+        <label class="form__label" for="email">Email</label>
+        <input class="form__input" type="text" name="email" id="email">
+    </div>
+    <div class="form__group">
+        <label class="form__label" for="password">Password</label>
+        <input class="form__input" type="password" name="password" id="password">
+    </div>
+    <div class="form__group">
+        <label class="form__label" for="confirm-password">Confirm Password</label>
+        <input class="form__input" type="password" name="confirmPassword" id="confirm-password">
+    </div>
+    <div class="form__group">
+        <input class="btn-primary" type="submit" value="Register">
+    </div>
 </form>

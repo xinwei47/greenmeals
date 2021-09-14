@@ -1,0 +1,30 @@
+.form {
+    width: 60%;
+    margin: auto;
+    &__group {
+        display: flex;
+        flex-direction: column;
+
+        &:not(:last-child) {
+            margin-bottom: $margin-sm;
+        }
+    }
+
+    &__label {
+        font-weight: 600;
+        margin-bottom: $margin-xs;
+    }
+
+    &__input {
+        font-family: inherit;
+        font-size: 2rem;
+        padding: $padding-xxs $padding-xs;
+        border-radius: $border-radius-sm;
+        border: 1px solid rgba($color-black, 0.2);
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $color-highlight;
+        }
+    }
+}

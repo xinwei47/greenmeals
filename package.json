@@ -26,6 +26,7 @@
   "homepage": "https://github.com/xinwei47/greenmeals#readme",
   "dependencies": {
     "autoprefixer": "^10.3.4",
+    "axios": "^0.21.4",
     "chart.js": "^3.5.1",
     "concat": "^1.0.3",
     "connect-flash": "^0.1.1",

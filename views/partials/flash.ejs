@@ -1,13 +1,13 @@
 <% if (success && success.length) { %>
 <div class="flash flash--success">
-    <p class="flash__msg"><%= success %> </p>
-    <button class="close"><i class="close__icon fas fa-times"></i></button>
+    <p class="flash__msg"><%= success %> <i class="flash__text-icon fas fa-check"></i></p>
+    <button class="flash__btn"><i class="flash__btn-icon fas fa-times"></i></button>
 </div>
 <% } %>
 
 <% if (error && error.length) { %>
 <div class="flash flash--error">
-    <p class="flash__msg"><%= error %> </p>
-    <button class="close"><i class="close__icon fas fa-times"></i></button>
+    <p class="flash__msg"><%= error %></i></p>
+    <button class="flash__btn"><i class="flash__btn-icon fas fa-times"></i></button>
 </div>
 <% } %>

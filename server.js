@@ -11,9 +11,10 @@ import MongoStore from 'connect-mongo'; // create a MongoDB store for express se
 
 import connectDB from './config/mongodb.js';
 import User from './models/users.js';
+import userRoutes from './routes/usersRoutes.js'
 
 dotenv.config();
-connectDB();
+connectDB(); // connect to mongoDB
 
 const app = express();
 
@@ -29,35 +30,42 @@ app.use(express.urlencoded({ extended: true }));
 // serve static assets folder. Then link the stylesheets to corresponding folder location
 app.use(express.static(path.join(__dirname + '/public')));
 
-// set up passport, passport-local
-app.use(passport.initialize()); // 'passport.initializer()' middleware is required to initialize passport in an Express-based app
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser()) // 'serialization' tells how to store the data in a session
-passport.deserializeUser(User.deserializeUser()) // 'deserialization' tells how to un-store the data in a session
 
 // set up session
 // create a session store for session data
 // configure cookie
 const secret = process.env.SECRET;
 app.use(session({
+    name: 'scid', // name our own session ID cookie instead of using default
     secret,
-    saveUninitialized: true, // don't create session until something stored
     resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
     store: MongoStore.create({
         mongoUrl: process.env.DB_URL,
-        // secret,
+        secret,
         touchAfter: 24 * 60 * 60 // touch the file in this amount of seconds if no changes to the content and no need to resave. 
     }),
     cookie: {
-        name: 'SCID', // name our own session ID cookie instead of using default
         httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // expires after 7 days from now
         maxAge: 60000
     }
 }))
 
 app.use(flash());
 
+// set up passport, passport-local. 
+// session must be set up first
+app.use(passport.initialize()); // 'passport.initializer()' middleware is required to initialize passport in an Express-based app
+app.use(passport.session())
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser()) // 'serialization' tells how to store the data in a session
+passport.deserializeUser(User.deserializeUser()) // 'deserialization' tells how to un-store the data in a session
+
+
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user //'req.user' automatically added by passport when user login
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -68,50 +76,23 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-// render register page
-app.get('/register', async (req, res) => {
-    res.render('users/register');
-})
-
-// register user
-// 'register(user, password, cb)' is a statics method added by password-local-mongoose.
-// It helps to register a new user instance by hashed a given password and also check if username is unique.
-// It also saves data to Mongo automatically.
-
-app.post('/register', async (req, res) => {
-    try {
-        // console.log(req.body);
-        const { username, email, password, confirmPassword } = req.body;
-        const user = new User({ username, email });
-        if (password === confirmPassword) {
-            const registerUser = await User.register(user, password)
-            req.login(registerUser, err => {
-                req.flash('success', 'register successfully');
-                res.redirect('/');
-            })
-        } else {
-            req.flash('error', 'Password do not match. Please try again.')
-            res.redirect('/register');
-        }
-
-    } catch (err) {
-        console.log(err);
-    }
-})
-
-// render login page
-app.get('/login', (req, res) => {
-    res.render('users/login');
-})
-
-// log user in
-// passport.authenticate() is a passport built-in middleware, which compares the password entered with the stored one and login the user if the data matches
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-    req.flash('success', 'Login successfully');
-    res.redirect('/');
-})
+app.use('/', userRoutes);
 
 
+// error handler
+// Order matters - code below will only run if the request doesn't match any of the route above
+// app.all means for every request no matter it's get, post, put, or delete
+// app.all('*', (req, res, next) => {
+// next(new ExpressError('Page not found', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
+
+// })
+
+// set up our basic error handler
+// app.use((err, req, res, next) => {
+//     const { statusCode = 500 } = err;
+//     if (!err.message) err.message = 'Oh no, something went wrong!'
+//     res.status(statusCode).render('errors', { err }) // render the errors.ejs
+// })
 
 app.listen(3000, () => {
     console.log('listening on port 3000');
