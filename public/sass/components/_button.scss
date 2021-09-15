@@ -1,13 +1,13 @@
 .btn-primary {
     display: inline-block;
     font: inherit;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: $color-white;
-    padding: $padding-xs $padding-lg;
+    padding: 0.8rem $padding-md-2;
     border: none;
     border-radius: $border-radius-xl;
-    background-color: $color-highlight;
+    background: linear-gradient(45deg, $color-highlight, rgba($color-highlight, 0.9));
     box-shadow: $box-shadow;
 
     &:hover {
@@ -18,5 +18,18 @@
     &:active {
         box-shadow: $box-shadow;
         transform: translateY(0);
+    }
+}
+
+.back-btn {
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    color: $color-primary;
+    margin: 0 0 $margin-sm 0;
+
+    &__icon {
+        font-size: 2.6rem;
     }
 }

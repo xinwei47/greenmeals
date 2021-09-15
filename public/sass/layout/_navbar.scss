@@ -15,15 +15,16 @@
     }
 
     // nav logo
-    &__logo,
-    &__menu {
-        transform: translateY(1rem);
+    &__logo {
+        transform: translateY(6px);
     }
 
     // nav menu
     &__menu {
+        transform: translateY(1rem);
         list-style: none;
         display: flex;
+        margin-left: $margin-md;
     }
 
     &__item {

@@ -1,0 +1,100 @@
+<% layout('layouts/boilerplate') %>
+
+<button class="back-btn" onclick="window.history.back()">
+    <i class="back-btn__icon fas fa-chevron-left"></i>
+</button>
+
+<div class="recipe">
+    <div class="recipe__heading">
+        <div class="recipe__img-container">
+            <img src=<%= recipe.image %> alt="" class="recipe__img">
+        </div>
+        <h2 class="recipe__name heading--2"><%= recipe.title %> </h2>
+        <p class="recipe__summary"><%- recipe.summary ? recipe.summary : '' %> </p>
+        <div class="recipe__stats-container">
+            <div class="recipe__stats">
+                <p><i class="recipe__stats-icon fas fa-user"></i></p>
+                <h4 class="recipe__stats-heading heading--4">Servings</h4>
+                <p class="recipe__servings"><%= recipe.servings ? recipe.servings : 'N/A' %> </p>
+            </div>
+            <div class="recipe__stats">
+                <p><i class="recipe__stats-icon fas fa-clock"></i></p>
+                <h4 class="recipe__stats-heading heading--4">Cooking Time</h4>
+                <p class="recipe__cooking-time"><%= recipe.readyInMinutes ? recipe.readyInMinutes : 'N/A' %> min</p>
+            </div>
+            <div class="recipe__stats">
+                <p><i class="recipe__stats-icon fas fa-star"></i></p>
+                <h4 class="recipe__stats-heading heading--4">Healthy Score</h4>
+                <p class="recipe__health-score"><%= recipe.healthScore ? recipe.healthScore : 'N/A' %> </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe__ingredients">
+        <h3 class="recipe__section-title heading--3">Ingredients</h3>
+        <ul class="recipe__ingredients-list">
+            <% recipe.extendedIngredients.forEach(ingredient=>{ %>
+            <li class="recipe__ingredient-item">
+                <%= ingredient.amount %> <%= ingredient.unit %> <%= ingredient.name %>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+
+    <div class="recipe__instructions">
+        <h3 class="recipe__section-title heading--3">Instructions</h3>
+        <ol class="recipe__instructions-list">
+            <% if (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps) { %>
+            <% recipe.analyzedInstructions[0].steps.forEach(instruction=>{ %>
+            <li class="recipe__instruction-item">
+                <%= instruction.step %>
+            </li>
+            <% }) %>
+            <% } %>
+        </ol>
+    </div>
+
+    <div class="recipe__taste">
+        <h3 class="recipe__section-title heading--3">Taste</h3>
+        <div class="recipe__taste-container">
+            <%- taste %>
+        </div>
+    </div>
+
+    <div class="recipe__nutritions">
+        <h3 class="recipe__section-title heading--3">Nutritions</h3>
+        <%- nutrition %>
+    </div>
+
+
+
+
+    <div class="recipe__reviews">
+        <h3 class="recipe__section-title heading--3">Reviews</h3>
+
+        <div class="recipe__write-review">
+            <h4 class="recipe__reviews-heading heading--4">Write a review</h4>
+
+            <!-- send review data to server -->
+            <form action="/recipe/<%= recipe.id %>/reviews" class="review-form" method="POST">
+                <div class="review-form__rating">
+                    <!-- <label for="rating">Rate the recipe</label> -->
+                    <input type="range" id="rating" name="review[rating]" min="1" max="5">
+                </div>
+                <div class="review-form__text-container">
+                    <!-- <label class="form-label" for="body">Review</label> -->
+                    <textarea class="review-form__text-field" name="review[text]" id="body"
+                        placeholder="Enter your review..." required></textarea>
+                </div>
+                <div class="review-form__btn-container">
+                    <button class="review-form__btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="recipe__review-display"></div>
+
+    </div>
+</div>

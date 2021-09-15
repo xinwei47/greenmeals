@@ -6,11 +6,13 @@ $color-highlight-error: #ae2012;
 $color-white: #fff;
 $color-black: #000;
 $color-grey: #f3f3f3;
+$color-grey-dark: #e5e5e5;
 
 $padding-xxs: 0.5rem;
 $padding-xs: 1rem;
 $padding-sm: 2rem;
 $padding-md: 4rem;
+$padding-md-2: 6rem;
 $padding-lg: 8rem;
 $padding-xl: 12rem;
 
@@ -18,6 +20,7 @@ $margin-xxs: 0.5rem;
 $margin-xs: 1rem;
 $margin-sm: 2rem;
 $margin-md: 4rem;
+$margin-md-2: 6rem;
 $margin-lg: 8rem;
 $margin-xl: 12rem;
 $margin-xxl: 14rem;
@@ -31,7 +34,7 @@ $border-radius-md: 10px;
 $border-radius-lg: 20px;
 $border-radius-xl: 40px;
 
-$grid-gap-xs: 1rem;
+$grid-gap-xs: 2rem;
 $grid-gap-sm: 4rem;
 $grid-gap-md: 6rem;
 $grid-gap-lg: 8rem;
@@ -42,3 +45,5 @@ $bp-md: 50em; //800px
 $bp-sm: 47.5em; //760px
 $bp-xs: 37.5em; //600px
 $bp-xxs: 25em; //400px
+
+$image-width: 40rem;

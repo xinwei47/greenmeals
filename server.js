@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import ejsMate from 'ejs-mate';
 import path from 'path';
+import axios from 'axios';
 
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
@@ -11,7 +12,9 @@ import MongoStore from 'connect-mongo'; // create a MongoDB store for express se
 
 import connectDB from './config/mongodb.js';
 import User from './models/users.js';
-import userRoutes from './routes/usersRoutes.js'
+import Review from './models/reviews.js';
+import userRoutes from './routes/usersRoutes.js';
+import ExpressError from './utilities/ExpressError.js';
 
 dotenv.config();
 connectDB(); // connect to mongoDB
@@ -58,7 +61,6 @@ app.use(flash());
 // session must be set up first
 app.use(passport.initialize()); // 'passport.initializer()' middleware is required to initialize passport in an Express-based app
 app.use(passport.session())
-
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()) // 'serialization' tells how to store the data in a session
 passport.deserializeUser(User.deserializeUser()) // 'deserialization' tells how to un-store the data in a session
@@ -79,20 +81,81 @@ app.get('/', (req, res) => {
 app.use('/', userRoutes);
 
 
+const apiKey = process.env.API_KEY;
+// search results
+app.post('/results', async (req, res) => {
+    const { searchString, searchIngredients, minFat, maxFat, minCalories, maxCalories, minCarbs, maxCarbs, minProtein, maxProtein } = req.body;
+    const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', {
+        params: {
+            apiKey,
+            query: searchString,
+            includeIngredients: searchIngredients,
+            ...(minFat ? { minFat } : {}),
+            ...(maxFat ? { maxFat } : {}),
+            ...(minCalories ? { minCalories } : {}),
+            ...(maxCalories ? { maxCalories } : {}),
+            ...(minCarbs ? { minCarbs } : {}),
+            ...(maxCarbs ? { maxCarbs } : {}),
+            ...(minProtein ? { minProtein } : {}),
+            ...(maxProtein ? { maxProtein } : {}),
+            addRecipeNutrition: true,
+            // instructionsRequired: true,
+            number: 21
+        }
+    })
+    const searchResults = response.data.results;
+    res.render('recipes/results', { searchResults });
+})
+
+app.get('/recipe/:id', async (req, res) => {
+    const recipeId = req.params.id;
+    const recipeResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information`, {
+        params: { apiKey }
+    })
+
+    const tasteResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/tasteWidget`, {
+        params: { apiKey }
+    })
+
+    const nutritionResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget`, {
+        params: { apiKey, defaultCss: true }
+    })
+
+    const recipe = recipeResponse.data;
+    const taste = tasteResponse.data;
+    const nutrition = nutritionResponse.data;
+    res.render('recipes/recipe', { recipe, taste, nutrition })
+})
+
+
+// user reviews
+app.post('/recipe/:id/reviews', async (req, res) => {
+    const recipeId = req.params.id;
+    const review = new Review(req.body.review)
+    review.recipeId = recipeId;
+    console.log(req.user);
+    // review.author = req.user._id; // _id is created by mongoDB automatocally
+    await review.save();
+    req.flash('success', 'New review added!');
+    res.redirect(`/recipe/${recipeId}`);
+
+})
+
+
 // error handler
 // Order matters - code below will only run if the request doesn't match any of the route above
 // app.all means for every request no matter it's get, post, put, or delete
-// app.all('*', (req, res, next) => {
-// next(new ExpressError('Page not found', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page not found', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
 
-// })
+})
 
 // set up our basic error handler
-// app.use((err, req, res, next) => {
-//     const { statusCode = 500 } = err;
-//     if (!err.message) err.message = 'Oh no, something went wrong!'
-//     res.status(statusCode).render('errors', { err }) // render the errors.ejs
-// })
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Oh no, something went wrong!'
+    res.status(statusCode).render('errors', { err }) // render the errors.ejs
+})
 
 app.listen(3000, () => {
     console.log('listening on port 3000');

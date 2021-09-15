@@ -1,0 +1,7 @@
+.search__results {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(38rem, 1fr));
+    column-gap: 1rem;
+    row-gap: 1rem;
+}

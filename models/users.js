@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
 })
 
 // Instead of adding the password directly to the schema, add on the password package to the userSchema

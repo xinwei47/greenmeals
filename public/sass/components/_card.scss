@@ -1,17 +1,30 @@
 .card {
     background-color: rgba($color-primary, 0.2);
-    padding: $padding-xs;
-
+    position: relative;
     list-style: none;
+
+    &__fav-btn {
+        position: absolute;
+        top: 0rem;
+        right: 0rem;
+        padding: 2rem;
+    }
+
+    &__fav-icon {
+        cursor: pointer;
+        font-size: 3rem;
+        color: $color-grey;
+    }
+
     &__link {
         &,
         &:link,
         &:active {
             color: $color-black;
-            display: grid;
-            grid-template-columns: min-content 1fr;
-            column-gap: $grid-gap-xs;
-            align-items: center;
+            // display: grid;
+            // grid-template-columns: min-content 1fr;
+            // column-gap: $grid-gap-xs;
+            // align-items: center;
             text-decoration: none;
 
             @media only screen and (max-width: $bp-md) {
@@ -23,8 +36,8 @@
     }
 
     &__img-container {
-        width: 10rem;
-        height: 10rem;
+        width: 100%;
+        height: calc(#{$image-width} * 9 / 16);
         overflow: hidden;
 
         @media only screen and (max-width: $bp-lg) {
@@ -47,12 +60,20 @@
         object-fit: cover;
     }
 
+    &__content {
+        padding: $padding-sm $padding-md;
+    }
+
+    &__title {
+        color: $color-primary;
+    }
+
     &__nutrition-overview {
-        margin-top: 1rem;
+        margin-top: $margin-sm;
         list-style: none;
         display: grid;
         grid-template-columns: repeat(2, max-content);
-        column-gap: $grid-gap-xs;
+        column-gap: $grid-gap-md;
         row-gap: $grid-gap-xs;
 
         @media only screen and (max-width: $bp-xl) {
@@ -60,11 +81,8 @@
         }
     }
     &__nutrition-item {
-        font-size: 1.2rem;
-    }
-
-    &:not(:last-of-type) {
-        margin-bottom: $margin-sm;
+        font-size: 1.4rem;
+        font-weight: 500;
     }
 
     &__selected {

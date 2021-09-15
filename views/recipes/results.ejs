@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="search__results">
+    <% searchResults.forEach(result => { %>
+    <div class="card">
+        <!-- insert fav icon as a checkbox -->
+        <!-- <div class="card__fav-btn"><i class="card__fav-icon fas fa-heart"></i></div> -->
+
+        <%- include('../partials/favtoggle') %>
+
+
+        <!-- card content -->
+        <a href="/recipe/<%= result.id %>" class="card__link">
+            <div class="card__img-container">
+                <img src=<%= result.image %> alt="" class="card__img">
+            </div>
+            <div class="card__content">
+                <h3 class="card__title heading--3"><%= result.title %></h3>
+                <ul class="card__nutrition-overview">
+                    <li class="card__nutrition-item"><%= result.nutrition.nutrients[0].name %>:
+                        <%= result.nutrition.nutrients[0].amount %>
+                        <%= result.nutrition.nutrients[0].unit %>
+                    </li>
+                    <li class="card__nutrition-item"><%= result.nutrition.nutrients[1].name %>:
+                        <%= result.nutrition.nutrients[1].amount %>
+                        <%= result.nutrition.nutrients[1].unit %>
+                    </li>
+                    <li class="card__nutrition-item"><%= result.nutrition.nutrients[3].name %>:
+                        <%= result.nutrition.nutrients[3].amount %>
+                        <%= result.nutrition.nutrients[3].unit %>
+                    </li>
+                    <li class="card__nutrition-item"><%= result.nutrition.nutrients[8].name %>:
+                        <%= result.nutrition.nutrients[8].amount %>
+                        <%= result.nutrition.nutrients[8].unit %>
+                    </li>
+
+                </ul>
+            </div>
+        </a>
+    </div>
+
+    <% }) %>
+
+</div>

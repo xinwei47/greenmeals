@@ -1,7 +1,9 @@
 .search {
+    flex: 1;
+
     &__input {
         font: inherit;
-        padding: 0.8rem;
+        padding: $padding-xs;
         padding-left: $padding-sm;
         width: 100%;
         border-radius: $border-radius-sm;
@@ -19,12 +21,39 @@
         }
     }
 
-    &__basic-input {
-        box-shadow: $box-shadow;
-    }
-
     &__basic {
         width: 100%;
+    }
+
+    &__input-box {
+        box-shadow: $box-shadow;
+        display: flex;
+        border-radius: $border-radius-sm;
+        overflow: hidden;
+    }
+
+    &__basic-input {
+        border-radius: 0;
+    }
+
+    &__btn-box {
+        cursor: pointer;
+        border: none;
+        background-color: $color-grey-dark;
+        padding: 1.2rem;
+        font-size: 1.6rem;
+    }
+
+    &__icon {
+        color: $color-primary;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
     }
 
     &__advanced-toggle {
@@ -43,34 +72,34 @@
             text-decoration: underline;
         }
 
-        &--navi {
-            margin-top: 1rem !important;
-        }
+        // &--navi {
+        //     margin-top: 1rem !important;
+        // }
     }
 
-    &__btn {
-        margin-top: $margin-md;
+    // &__btn-text {
+    //     margin-top: $margin-md;
 
-        &--navi {
-            font-size: 1.6rem !important;
+    //     &--navi {
+    //         font-size: 1.6rem !important;
 
-            grid-row: 1/2;
-            grid-column: 2/3;
-            margin-top: 0;
-            margin-left: $margin-md;
+    //         grid-row: 1/2;
+    //         grid-column: 2/3;
+    //         margin-top: 0;
+    //         margin-left: $margin-md;
 
-            @media only screen and (max-width: $bp-lg) {
-                font-weight: 500 !important;
-                padding: $padding-xs $padding-md !important;
-            }
+    //         @media only screen and (max-width: $bp-lg) {
+    //             font-weight: 500 !important;
+    //             padding: $padding-xs $padding-md !important;
+    //         }
 
-            @media only screen and (max-width: $bp-md) {
-                margin-left: $margin-sm;
-                font-weight: 400 !important;
-                padding: $padding-xs $padding-sm !important;
-            }
-        }
-    }
+    //         @media only screen and (max-width: $bp-md) {
+    //             margin-left: $margin-sm;
+    //             font-weight: 400 !important;
+    //             padding: $padding-xs $padding-sm !important;
+    //         }
+    //     }
+    // }
 
     // advanced search box
     &__advanced {
@@ -87,9 +116,9 @@
 
         position: relative;
 
-        &--navi {
-            grid-column: 1/4;
-        }
+        // &--navi {
+        //     grid-column: 1/4;
+        // }
     }
     &__label {
         font-size: 1.6rem;
