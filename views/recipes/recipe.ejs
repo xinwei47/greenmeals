@@ -72,9 +72,9 @@
     <div class="recipe__reviews">
         <h3 class="recipe__section-title heading--3">Reviews</h3>
 
+        <% if(currentUser) { %>
         <div class="recipe__write-review">
             <h4 class="recipe__reviews-heading heading--4">Write a review</h4>
-
             <!-- send review data to server -->
             <form action="/recipe/<%= recipe.id %>/reviews" class="review-form" method="POST">
                 <div class="review-form__rating">
@@ -89,12 +89,21 @@
                 <div class="review-form__btn-container">
                     <button class="review-form__btn btn-primary">Submit</button>
                 </div>
-
             </form>
         </div>
+        <% } %>
 
+        <!-- display reviews -->
+        <div class="recipe__review-display">
+            <% reviews.forEach(review => { %>
+            <div class="review">
+                <div class="review__rating">Rating: <%= review.rating %></div>
+                <div class="review__text"><%= review.text %></div>
+                <div class="review__author">by <%= review.author.username %></div>
+            </div>
+            <% }) %>
 
-        <div class="recipe__review-display"></div>
+        </div>
 
     </div>
 </div>

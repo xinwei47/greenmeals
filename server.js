@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
 
 app.use('/', userRoutes);
 
-
+// fetch search results from api
 const apiKey = process.env.API_KEY;
 // search results
 app.post('/results', async (req, res) => {
@@ -99,7 +99,6 @@ app.post('/results', async (req, res) => {
             ...(minProtein ? { minProtein } : {}),
             ...(maxProtein ? { maxProtein } : {}),
             addRecipeNutrition: true,
-            // instructionsRequired: true,
             number: 21
         }
     })
@@ -107,6 +106,7 @@ app.post('/results', async (req, res) => {
     res.render('recipes/results', { searchResults });
 })
 
+// fetch recipe details from api
 app.get('/recipe/:id', async (req, res) => {
     const recipeId = req.params.id;
     const recipeResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information`, {
@@ -124,23 +124,27 @@ app.get('/recipe/:id', async (req, res) => {
     const recipe = recipeResponse.data;
     const taste = tasteResponse.data;
     const nutrition = nutritionResponse.data;
-    res.render('recipes/recipe', { recipe, taste, nutrition })
+    // find reviews if there are any in the database
+    // Review.find() -> find all documents that recipeId matches
+    const reviews = await Review.find({ recipeId }).populate({ path: 'author' })
+    res.render('recipes/recipe', { recipe, taste, nutrition, reviews })
 })
 
-
-// user reviews
+// post user reviews
 app.post('/recipe/:id/reviews', async (req, res) => {
     const recipeId = req.params.id;
-    const review = new Review(req.body.review)
-    review.recipeId = recipeId;
-    console.log(req.user);
-    // review.author = req.user._id; // _id is created by mongoDB automatocally
-    await review.save();
-    req.flash('success', 'New review added!');
+    if (req.user) {
+        const review = new Review(req.body.review)
+        review.recipeId = recipeId;
+        review.author = req.user._id; // _id is created by mongoDB automatocally
+        await review.save();
+        req.flash('success', 'New review added!');
+    } else {
+        req.flash('error', 'Please login first.')
+    }
     res.redirect(`/recipe/${recipeId}`);
 
 })
-
 
 // error handler
 // Order matters - code below will only run if the request doesn't match any of the route above
