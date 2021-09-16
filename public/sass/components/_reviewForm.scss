@@ -1,4 +1,8 @@
 .review-form {
+    &__rating {
+        margin-top: -1rem;
+    }
+
     &__text-container {
         margin-top: $margin-xs;
     }

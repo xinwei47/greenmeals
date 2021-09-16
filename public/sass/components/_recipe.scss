@@ -23,7 +23,6 @@
                 text-decoration: none;
                 color: $color-primary;
             }
-
             &:hover {
                 text-decoration: underline;
             }
@@ -40,7 +39,6 @@
         grid-template-columns: repeat(3, 1fr);
         justify-items: center;
     }
-
     &__stats {
         display: flex;
         flex-direction: column;
@@ -83,7 +81,36 @@
         margin: auto;
     }
 
+    // nutritions
+    &__nutritions {
+        & div:last-child {
+            display: none;
+        }
+    }
+
+    // reviews
     &__write-review {
         margin-top: $margin-sm;
+    }
+
+    &__display-review {
+        margin-top: $margin-md-2;
+    }
+
+    &__reviews-heading {
+        margin-top: $margin-sm;
+
+        & > a {
+            &,
+            &:link,
+            &:visited {
+                text-decoration: none;
+                color: $color-primary;
+                font-weight: 600;
+            }
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }

@@ -245,7 +245,7 @@ body {
   transform: translateY(0);
 }
 
-.back-btn {
+.btn-back {
   cursor: pointer;
   display: inline-block;
   border: none;
@@ -253,8 +253,17 @@ body {
   color: #55a630;
   margin: 0 0 2rem 0;
 }
-.back-btn__icon {
+.btn-back__icon {
   font-size: 2.6rem;
+}
+
+.btn-delete {
+  background-color: #ae2012;
+  border: none;
+  padding: 1rem 2rem;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
 .card {
@@ -406,8 +415,25 @@ body {
   width: 70%;
   margin: auto;
 }
+.recipe__nutritions div:last-child {
+  display: none;
+}
 .recipe__write-review {
   margin-top: 2rem;
+}
+.recipe__display-review {
+  margin-top: 6rem;
+}
+.recipe__reviews-heading {
+  margin-top: 2rem;
+}
+.recipe__reviews-heading > a, .recipe__reviews-heading > a:link, .recipe__reviews-heading > a:visited {
+  text-decoration: none;
+  color: #55a630;
+  font-weight: 600;
+}
+.recipe__reviews-heading > a:hover {
+  text-decoration: underline;
 }
 
 .loader {
@@ -502,6 +528,9 @@ body {
   border-bottom: 1px solid #bc6c25;
 }
 
+.review-form__rating {
+  margin-top: -1rem;
+}
 .review-form__text-container {
   margin-top: 1rem;
 }
@@ -523,6 +552,26 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+.review {
+  background-color: rgba(170, 204, 0, 0.2);
+  border-radius: 4px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+.review__author {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.review__text {
+  margin-top: 2rem;
+}
+.review__delete-box {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .nav {
   width: 100%;
   display: flex;
@@ -532,6 +581,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
 }
 .nav-page {
   align-items: flex-start;

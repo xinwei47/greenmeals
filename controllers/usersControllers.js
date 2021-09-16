@@ -1,4 +1,4 @@
-import User from '../models/users.js';
+import User from '../models/user.js';
 
 // render register page
 export const renderRegister = (req, res) => {
@@ -39,11 +39,9 @@ export const renderLogin = (req, res) => {
 // passport.authenticate() is a passport built-in middleware, which compares the password entered with the stored one and login the user if the data matches
 export const loginUser = (req, res) => {
     req.flash('success', 'Welcome back');
-    console.log(req.session.currentUrl); // currentUrl: undefined; req.originalUrl bring to /login
     const redirectUrl = req.session.returnTo || '/'
-    delete req.session.returnTo; // remove the returnTo link from the 'session' object
+    // delete req.session.returnTo; // remove the returnTo link from the 'session' object
     res.redirect(redirectUrl);
-    // res.redirect('/');
 }
 
 

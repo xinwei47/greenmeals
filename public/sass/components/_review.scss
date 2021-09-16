@@ -1,0 +1,22 @@
+.review {
+    background-color: rgba($color-secondary, 0.2);
+    border-radius: $border-radius-sm;
+    padding: $padding-sm;
+    margin-top: $margin-sm;
+    box-shadow: $box-shadow-2;
+
+    &__author {
+        font-weight: 600;
+        margin-top: $margin-xs;
+    }
+
+    &__text {
+        margin-top: $margin-sm;
+    }
+
+    &__delete-box {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

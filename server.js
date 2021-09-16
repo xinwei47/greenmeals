@@ -2,19 +2,18 @@ import dotenv from 'dotenv';
 import express from 'express';
 import ejsMate from 'ejs-mate';
 import path from 'path';
-import axios from 'axios';
-
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import flash from 'connect-flash';
 import session from 'express-session';
 import MongoStore from 'connect-mongo'; // create a MongoDB store for express session data rather than using the memory by default
-
+import methodOverride from 'method-override';
 import connectDB from './config/mongodb.js';
-import User from './models/users.js';
-import Review from './models/reviews.js';
-import userRoutes from './routes/usersRoutes.js';
+import User from './models/user.js';
 import ExpressError from './utilities/ExpressError.js';
+import userRoutes from './routes/usersRoutes.js';
+import recipesRoutes from './routes/recipesRoutes.js';
+import reviewRoutes from './routes/reviewsRoutes.js';
 
 dotenv.config();
 connectDB(); // connect to mongoDB
@@ -33,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 // serve static assets folder. Then link the stylesheets to corresponding folder location
 app.use(express.static(path.join(__dirname + '/public')));
 
+// configure method-override
+app.use(methodOverride('_method'));
 
 // set up session
 // create a session store for session data
@@ -70,6 +71,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user //'req.user' automatically added by passport when user login
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+
     next();
 })
 
@@ -78,73 +80,11 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
+// routes
+app.use('/recipes/:id/reviews', reviewRoutes);
+app.use('/recipes', recipesRoutes);
 app.use('/', userRoutes);
 
-// fetch search results from api
-const apiKey = process.env.API_KEY;
-// search results
-app.post('/results', async (req, res) => {
-    const { searchString, searchIngredients, minFat, maxFat, minCalories, maxCalories, minCarbs, maxCarbs, minProtein, maxProtein } = req.body;
-    const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', {
-        params: {
-            apiKey,
-            query: searchString,
-            includeIngredients: searchIngredients,
-            ...(minFat ? { minFat } : {}),
-            ...(maxFat ? { maxFat } : {}),
-            ...(minCalories ? { minCalories } : {}),
-            ...(maxCalories ? { maxCalories } : {}),
-            ...(minCarbs ? { minCarbs } : {}),
-            ...(maxCarbs ? { maxCarbs } : {}),
-            ...(minProtein ? { minProtein } : {}),
-            ...(maxProtein ? { maxProtein } : {}),
-            addRecipeNutrition: true,
-            number: 21
-        }
-    })
-    const searchResults = response.data.results;
-    res.render('recipes/results', { searchResults });
-})
-
-// fetch recipe details from api
-app.get('/recipe/:id', async (req, res) => {
-    const recipeId = req.params.id;
-    const recipeResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information`, {
-        params: { apiKey }
-    })
-
-    const tasteResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/tasteWidget`, {
-        params: { apiKey }
-    })
-
-    const nutritionResponse = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/nutritionWidget`, {
-        params: { apiKey, defaultCss: true }
-    })
-
-    const recipe = recipeResponse.data;
-    const taste = tasteResponse.data;
-    const nutrition = nutritionResponse.data;
-    // find reviews if there are any in the database
-    // Review.find() -> find all documents that recipeId matches
-    const reviews = await Review.find({ recipeId }).populate({ path: 'author' })
-    res.render('recipes/recipe', { recipe, taste, nutrition, reviews })
-})
-
-// post user reviews
-app.post('/recipe/:id/reviews', async (req, res) => {
-    const recipeId = req.params.id;
-    if (req.user) {
-        const review = new Review(req.body.review)
-        review.recipeId = recipeId;
-        review.author = req.user._id; // _id is created by mongoDB automatocally
-        await review.save();
-        req.flash('success', 'New review added!');
-    } else {
-        req.flash('error', 'Please login first.')
-    }
-    res.redirect(`/recipe/${recipeId}`);
-
-})
 
 // error handler
 // Order matters - code below will only run if the request doesn't match any of the route above
