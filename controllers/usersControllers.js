@@ -10,23 +10,18 @@ export const renderRegister = (req, res) => {
 // It helps to register a new user instance by hashed a given password and also check if username is unique.
 // It also saves data to Mongo automatically.
 
-export const registerUser = async (req, res) => {
-    try {
-        const { username, email, password, confirmPassword } = req.body;
-        const user = new User({ username, email });
-        if (password === confirmPassword) {
-            const registerUser = await User.register(user, password)
-            req.login(registerUser, err => {
-                req.flash('success', 'register successfully');
-                res.redirect('/');
-            })
-        } else {
-            req.flash('error', 'Password do not match. Please try again.')
-            res.redirect('/register');
-        }
-
-    } catch (err) {
-        console.log(err);
+export const registerUser = async (req, res, next) => {
+    const { username, email, password, confirmPassword } = req.body;
+    const user = new User({ username, email });
+    if (password === confirmPassword) {
+        const registerUser = await User.register(user, password)
+        req.login(registerUser, err => {
+            req.flash('success', 'register successfully');
+            res.redirect('/');
+        })
+    } else {
+        req.flash('error', 'Password do not match. Please try again.')
+        res.redirect('/register');
     }
 }
 
@@ -36,11 +31,13 @@ export const renderLogin = (req, res) => {
 }
 
 // log user in
-// passport.authenticate() is a passport built-in middleware, which compares the password entered with the stored one and login the user if the data matches
 export const loginUser = (req, res) => {
     req.flash('success', 'Welcome back');
+    // where to place req.session.returnTo = req.originalUrl?
+    // req.session.returnTo = req.originalUrl;
+    // console.log(req.session.returnTo);
     const redirectUrl = req.session.returnTo || '/'
-    // delete req.session.returnTo; // remove the returnTo link from the 'session' object
+    delete req.session.returnTo; // remove the returnTo link from the 'session' object
     res.redirect(redirectUrl);
 }
 

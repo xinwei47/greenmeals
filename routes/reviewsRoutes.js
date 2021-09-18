@@ -1,16 +1,15 @@
 import express from "express";
 import { postReview, deleteReview } from '../controllers/reviewsControllers.js'
-// import { isLoggedIn, isReviewAuthor } from '../middleware.js'
+// import { isLoggedIn, isReviewAuthor } from '../middleware.js';
+import catchAsyncError from '../utilities/catchAsyncError.js';
 
 const router = express.Router({ mergeParams: true });
 
 
 router.route('/')
-    .post(postReview)
-
-// router.post('/recipe/:id/reviews', postReview);
+    .post(catchAsyncError(postReview))
 
 router.route('/:reviewId')
-    .delete(deleteReview)
+    .delete(catchAsyncError(deleteReview))
 
 export default router;

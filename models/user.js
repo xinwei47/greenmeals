@@ -8,6 +8,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    recipes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Recipe'
+    }]
 })
 
 // Instead of adding the password directly to the schema, add on the password package to the userSchema

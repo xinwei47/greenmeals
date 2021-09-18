@@ -9,11 +9,14 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo'; // create a MongoDB store for express session data rather than using the memory by default
 import methodOverride from 'method-override';
 import connectDB from './config/mongodb.js';
-import User from './models/user.js';
 import ExpressError from './utilities/ExpressError.js';
 import userRoutes from './routes/usersRoutes.js';
 import recipesRoutes from './routes/recipesRoutes.js';
 import reviewRoutes from './routes/reviewsRoutes.js';
+
+import User from './models/user.js';
+import Recipe from './models/recipe.js'
+import mongoose from 'mongoose'
 
 dotenv.config();
 connectDB(); // connect to mongoDB
@@ -71,7 +74,6 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user //'req.user' automatically added by passport when user login
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
-
     next();
 })
 
@@ -86,12 +88,47 @@ app.use('/recipes', recipesRoutes);
 app.use('/', userRoutes);
 
 
+app.get('/account', async (req, res) => {
+    const user = await User.findById(req.user._id).populate('recipes');
+    const userFavoriteRecipes = user.recipes;
+
+    res.render('users/account', { userFavoriteRecipes });
+})
+
+
+// save favorite recipes
+app.post('/account/favorites', async (req, res, next) => {
+    console.log(req.query);
+
+    if (req.body.fav === 'on') {
+        console.log('added to favorite');
+        // save recipe information to MongoDB
+        // display saved recipes as cards on user's account page
+        console.log(req.body.fav);
+        const favRecipe = await new Recipe(req.query);
+        const user = await User.findById(req.user._id).populate('recipes');
+        user.recipes.push(favRecipe);
+
+        await favRecipe.save();
+        await user.save();
+    } else {
+        console.log('removed from favorite');
+        const unfavRecipe = await Recipe.findOne({ recipeId: req.query.recipeId })
+        await User.findByIdAndUpdate(req.user._id, { $pull: { recipes: unfavRecipe._id } })
+    }
+
+    res.redirect('/account')
+})
+
+
+
+
+
 // error handler
 // Order matters - code below will only run if the request doesn't match any of the route above
 // app.all means for every request no matter it's get, post, put, or delete
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page not found', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
-
 })
 
 // set up our basic error handler

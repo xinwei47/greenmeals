@@ -2,6 +2,13 @@
     background-color: rgba($color-primary, 0.2);
     position: relative;
     list-style: none;
+    outline: 1px solid rgba($color-secondary, 0.4);
+    box-shadow: $box-shadow-2;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: rgba($color-primary, 0.25);
+    }
 
     &__fav-btn {
         position: absolute;
@@ -27,11 +34,11 @@
             // align-items: center;
             text-decoration: none;
 
-            @media only screen and (max-width: $bp-md) {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            // @media only screen and (max-width: $bp-md) {
+            //     display: flex;
+            //     flex-direction: column;
+            //     align-items: flex-start;
+            // }
         }
     }
 
@@ -40,17 +47,17 @@
         height: calc(#{$image-width} * 9 / 16);
         overflow: hidden;
 
-        @media only screen and (max-width: $bp-lg) {
-            width: 8rem;
-            height: 8rem;
-        }
+        // @media only screen and (max-width: $bp-lg) {
+        //     width: 8rem;
+        //     height: 8rem;
+        // }
 
-        @media only screen and (max-width: $bp-md) {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            margin-bottom: $margin-xs;
-        }
+        // @media only screen and (max-width: $bp-md) {
+        //     width: 100%;
+        //     height: auto;
+        //     object-fit: cover;
+        //     margin-bottom: $margin-xs;
+        // }
     }
 
     &__img {
@@ -72,20 +79,25 @@
         margin-top: $margin-sm;
         list-style: none;
         display: grid;
-        grid-template-columns: repeat(2, max-content);
-        column-gap: $grid-gap-md;
+        grid-template-columns: max-content minmax(1rem, 1fr) max-content;
+        // column-gap: $grid-gap-md;
         row-gap: $grid-gap-xs;
 
-        @media only screen and (max-width: $bp-xl) {
-            display: none;
-        }
+        // @media only screen and (max-width: $bp-sm) {
+        //     column-gap: $grid-gap-xs;
+        // }
     }
     &__nutrition-item {
         font-size: 1.4rem;
         font-weight: 500;
+
+        &:nth-child(2),
+        &:last-child {
+            grid-column: 3/4;
+        }
     }
 
-    &__selected {
-        border: 2px solid $color-primary;
-    }
+    // &__selected {
+    //     border: 2px solid $color-primary;
+    // }
 }

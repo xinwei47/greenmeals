@@ -1,6 +1,6 @@
 import Review from '../models/review.js'
 
-export const postReview = async (req, res) => {
+export const postReview = async (req, res, next) => {
     const recipeId = req.params.id;
     if (req.user) {
         const review = new Review(req.body.review)
@@ -14,7 +14,7 @@ export const postReview = async (req, res) => {
     res.redirect(`/recipes/${recipeId}`);
 }
 
-export const deleteReview = async (req, res) => {
+export const deleteReview = async (req, res, next) => {
     const { id: recipeId, reviewId } = req.params;
     // verify is the user is login and user is the author
     const review = await Review.findById(reviewId).populate({ path: 'author' })

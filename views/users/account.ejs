@@ -1,0 +1,21 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="account">
+    <div class="account__favorite">
+        <section class="fav__card">
+            <h1 class="fav__section-title">Favorite Recipes</h1>
+
+            <% userFavoriteRecipes.forEach(favRecipe => { %>
+            <div class="fav__recipe-container">
+                <div class="fav__img-container">
+                    <img src="<%= favRecipe.image %>" alt="" class="fav__img">
+                </div>
+                <h2 class="fav__recipe-title"><%= favRecipe.title %></h2>
+            </div>
+            <% }) %>
+
+        </section>
+
+
+    </div>
+</div>

@@ -270,6 +270,12 @@ body {
   background-color: rgba(85, 166, 48, 0.2);
   position: relative;
   list-style: none;
+  outline: 1px solid rgba(170, 204, 0, 0.4);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+.card:hover {
+  background-color: rgba(85, 166, 48, 0.25);
 }
 .card__fav-btn {
   position: absolute;
@@ -286,31 +292,10 @@ body {
   color: #000;
   text-decoration: none;
 }
-@media only screen and (max-width: 50em) {
-  .card__link, .card__link:link, .card__link:active {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
 .card__img-container {
   width: 100%;
   height: calc(40rem * 9 / 16);
   overflow: hidden;
-}
-@media only screen and (max-width: 62.5em) {
-  .card__img-container {
-    width: 8rem;
-    height: 8rem;
-  }
-}
-@media only screen and (max-width: 50em) {
-  .card__img-container {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 1rem;
-  }
 }
 .card__img {
   display: block;
@@ -328,21 +313,15 @@ body {
   margin-top: 2rem;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, max-content);
-  column-gap: 6rem;
+  grid-template-columns: max-content minmax(1rem, 1fr) max-content;
   row-gap: 2rem;
-}
-@media only screen and (max-width: 65em) {
-  .card__nutrition-overview {
-    display: none;
-  }
 }
 .card__nutrition-item {
   font-size: 1.4rem;
   font-weight: 500;
 }
-.card__selected {
-  border: 2px solid #55a630;
+.card__nutrition-item:nth-child(2), .card__nutrition-item:last-child {
+  grid-column: 3/4;
 }
 
 .recipe {
@@ -350,11 +329,14 @@ body {
 }
 .recipe__img-container {
   width: 100%;
+  height: 35vh;
 }
 .recipe__img {
-  width: 100%;
+  display: block;
+  max-width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 .recipe__name {
   color: #55a630;
@@ -529,7 +511,7 @@ body {
 }
 
 .review-form__rating {
-  margin-top: -1rem;
+  margin-top: 1rem;
 }
 .review-form__text-container {
   margin-top: 1rem;
@@ -638,9 +620,8 @@ body {
 .search__results {
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, minmax(38rem, 1fr));
-  column-gap: 1rem;
-  row-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
 }
 
 /*# sourceMappingURL=style.css.map */

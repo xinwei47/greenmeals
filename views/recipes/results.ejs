@@ -1,13 +1,30 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="search__results">
-    <% searchResults.forEach(result => { %>
+    <% searchResults.forEach((result, ind) => { %>
+
+
+
+
     <div class="card">
         <!-- insert fav icon as a checkbox -->
-        <!-- <div class="card__fav-btn"><i class="card__fav-icon fas fa-heart"></i></div> -->
+        <form action="/account/favorites/?recipeId=<%= result.id %>&image=<%= result.image %>&title=<%= result.title %>"
+            class="fav" method="POST">
 
-        <%- include('../partials/favtoggle') %>
+            <!-- check if the result is in the favorite recipe database -->
+            <% if(favRecipesIdArr.includes(result.id)) { %>
+            <input type="checkbox" name="fav" id="fav-toggle-<%= ind %>" class="fav-toggle"
+                onchange="this.form.submit()" checked>
 
+            <% } else { %>
+            <input type="checkbox" name="fav" id="fav-toggle-<%= ind %>" class="fav-toggle"
+                onchange="this.form.submit()">
+            <% } %>
+
+            <label for="fav-toggle-<%= ind %>">
+                <div class="fav__btn"><i class="fav__icon fas fa-heart"></i></div>
+            </label>
+        </form>
 
         <!-- card content -->
         <a href="/recipes/<%= result.id %>" class="card__link">
