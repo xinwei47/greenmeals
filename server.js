@@ -13,10 +13,10 @@ import ExpressError from './utilities/ExpressError.js';
 import userRoutes from './routes/usersRoutes.js';
 import recipesRoutes from './routes/recipesRoutes.js';
 import reviewRoutes from './routes/reviewsRoutes.js';
+import accountRoutes from './routes/accountRoutes.js';
 
 import User from './models/user.js';
 import Recipe from './models/recipe.js'
-import mongoose from 'mongoose'
 
 dotenv.config();
 connectDB(); // connect to mongoDB
@@ -85,38 +85,8 @@ app.get('/', (req, res) => {
 // routes
 app.use('/recipes/:id/reviews', reviewRoutes);
 app.use('/recipes', recipesRoutes);
+app.use('/account', accountRoutes);
 app.use('/', userRoutes);
-
-
-app.get('/account', async (req, res) => {
-    const user = await User.findById(req.user._id).populate('recipes');
-    const userFavoriteRecipes = user.recipes;
-    res.render('users/account', { userFavoriteRecipes });
-})
-
-
-// save favorite recipes
-app.post('/account/favorites', async (req, res, next) => {
-    // save recipe information to MongoDB
-    // display saved recipes as cards on user's account page
-    const favRecipe = await new Recipe(req.query);
-    const user = await User.findById(req.user._id).populate('recipes');
-    user.recipes.push(favRecipe);
-
-    await favRecipe.save();
-    await user.save();
-
-    res.redirect('/account')
-})
-
-app.delete('/account/favorites/:id', async (req, res) => {
-    console.log(req.params)
-    console.log('removed from favorite');
-    const unfavRecipe = await Recipe.findById(req.params.id)
-    await User.findByIdAndUpdate(req.user._id, { $pull: { recipes: unfavRecipe._id } })
-    res.redirect('/account')
-})
-
 
 
 // error handler

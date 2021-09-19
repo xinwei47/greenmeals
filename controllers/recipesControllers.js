@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Review from '../models/review.js'
 import User from '../models/user.js'
-import Recipe from '../models/recipe.js'
 
 dotenv.config();
 const apiKey = process.env.API_KEY;
@@ -36,7 +35,6 @@ export const fetchResults = async (req, res, next) => {
         // const user = await User.findById(req.user._id).populate({ path: 'Recipes' }); // not working
         const user = await User.findById(req.user._id).populate('recipes');
         favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
-        console.log(favRecipesIdArr)
     }
     // console.log(favRecipesIdArr);
     res.render('recipes/results', { searchResults, favRecipesIdArr });
@@ -69,9 +67,7 @@ export const fetchRecipe = async (req, res, next) => {
     if (req.user) {
         const user = await User.findById(req.user._id).populate('recipes');
         favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
-        console.log(favRecipesIdArr)
     }
-
 
     res.render('recipes/recipe', { recipe, taste, nutrition, reviews, favRecipesIdArr })
 }
