@@ -1,13 +1,14 @@
 .home-container {
     width: 70%;
-    margin-top: 10%;
+    margin-top: 8%;
 }
 
 .app-text {
-    margin-bottom: $margin-lg;
+    margin-bottom: $margin-md-2;
 
     &__heading {
         line-height: 1;
+        color: $color-white;
     }
 
     &__period {

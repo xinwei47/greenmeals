@@ -35,7 +35,8 @@ export const fetchResults = async (req, res, next) => {
     if (req.user) {
         // const user = await User.findById(req.user._id).populate({ path: 'Recipes' }); // not working
         const user = await User.findById(req.user._id).populate('recipes');
-        favRecipesIdArr = user.recipes.map(recipe => recipe.recipeId);
+        favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
+        console.log(favRecipesIdArr)
     }
     // console.log(favRecipesIdArr);
     res.render('recipes/results', { searchResults, favRecipesIdArr });
@@ -63,6 +64,15 @@ export const fetchRecipe = async (req, res, next) => {
     // Review.find() -> find all documents that recipeId matches
     // const reviews = await Review.find({ recipeId }).populate({ path: 'author' }) // working as well
     const reviews = await Review.find({ recipeId }).populate('author');
-    res.render('recipes/recipe', { recipe, taste, nutrition, reviews })
+
+    let favRecipesIdArr;
+    if (req.user) {
+        const user = await User.findById(req.user._id).populate('recipes');
+        favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
+        console.log(favRecipesIdArr)
+    }
+
+
+    res.render('recipes/recipe', { recipe, taste, nutrition, reviews, favRecipesIdArr })
 }
 

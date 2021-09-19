@@ -91,36 +91,31 @@ app.use('/', userRoutes);
 app.get('/account', async (req, res) => {
     const user = await User.findById(req.user._id).populate('recipes');
     const userFavoriteRecipes = user.recipes;
-
     res.render('users/account', { userFavoriteRecipes });
 })
 
 
 // save favorite recipes
 app.post('/account/favorites', async (req, res, next) => {
-    console.log(req.query);
+    // save recipe information to MongoDB
+    // display saved recipes as cards on user's account page
+    const favRecipe = await new Recipe(req.query);
+    const user = await User.findById(req.user._id).populate('recipes');
+    user.recipes.push(favRecipe);
 
-    if (req.body.fav === 'on') {
-        console.log('added to favorite');
-        // save recipe information to MongoDB
-        // display saved recipes as cards on user's account page
-        console.log(req.body.fav);
-        const favRecipe = await new Recipe(req.query);
-        const user = await User.findById(req.user._id).populate('recipes');
-        user.recipes.push(favRecipe);
-
-        await favRecipe.save();
-        await user.save();
-    } else {
-        console.log('removed from favorite');
-        const unfavRecipe = await Recipe.findOne({ recipeId: req.query.recipeId })
-        await User.findByIdAndUpdate(req.user._id, { $pull: { recipes: unfavRecipe._id } })
-    }
+    await favRecipe.save();
+    await user.save();
 
     res.redirect('/account')
 })
 
-
+app.delete('/account/favorites/:id', async (req, res) => {
+    console.log(req.params)
+    console.log('removed from favorite');
+    const unfavRecipe = await Recipe.findById(req.params.id)
+    await User.findByIdAndUpdate(req.user._id, { $pull: { recipes: unfavRecipe._id } })
+    res.redirect('/account')
+})
 
 
 

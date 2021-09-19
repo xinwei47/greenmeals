@@ -13,10 +13,23 @@
         object-fit: cover;
         object-position: center center;
     }
+
+    &__title{
+        margin-top: $margin-sm;
+        display: flex;
+    }
+
     &__name {
         color: $color-primary;
-        margin-top: $margin-sm;
+        margin-right: $margin-xs;
     }
+    
+    &__fav-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     &__summary {
         margin-top: $margin-sm;
         & > a {

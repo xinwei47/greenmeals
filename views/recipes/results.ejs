@@ -3,28 +3,19 @@
 <div class="search__results">
     <% searchResults.forEach((result, ind) => { %>
 
-
-
-
     <div class="card">
         <!-- insert fav icon as a checkbox -->
-        <form action="/account/favorites/?recipeId=<%= result.id %>&image=<%= result.image %>&title=<%= result.title %>"
-            class="fav" method="POST">
-
-            <!-- check if the result is in the favorite recipe database -->
-            <% if(favRecipesIdArr.includes(result.id)) { %>
-            <input type="checkbox" name="fav" id="fav-toggle-<%= ind %>" class="fav-toggle"
-                onchange="this.form.submit()" checked>
-
+        <!-- check if the result is in the favorite recipe database -->
+        <div class="card__fav-box">
+            <% if(currentUser) { %>
+            <% if(favRecipesIdArr.find(arr => arr.includes(result.id))) { %>
+            <%- include('../partials/unfavform', {id: favRecipesIdArr.find(arr => arr.includes(result.id))[1], ind}) %>
             <% } else { %>
-            <input type="checkbox" name="fav" id="fav-toggle-<%= ind %>" class="fav-toggle"
-                onchange="this.form.submit()">
+            <%- include('../partials/favform', {recipe: result, ind}) %>
             <% } %>
-
-            <label for="fav-toggle-<%= ind %>">
-                <div class="fav__btn"><i class="fav__icon fas fa-heart"></i></div>
-            </label>
-        </form>
+            <% } %>
+        </div>
+        <!-- fav icon ends -->
 
         <!-- card content -->
         <a href="/recipes/<%= result.id %>" class="card__link">
@@ -50,7 +41,6 @@
                         <%= result.nutrition.nutrients[8].amount %>
                         <%= result.nutrition.nutrients[8].unit %>
                     </li>
-
                 </ul>
             </div>
         </a>

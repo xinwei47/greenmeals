@@ -46,7 +46,6 @@ body {
 
 .heading--1 {
   font-size: 4.8rem;
-  color: #fff;
 }
 @media only screen and (max-width: 25em) {
   .heading--1 {
@@ -277,16 +276,14 @@ body {
 .card:hover {
   background-color: rgba(85, 166, 48, 0.25);
 }
-.card__fav-btn {
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  padding: 2rem;
+.card:hover .card__title {
+  color: #bc6c25;
 }
-.card__fav-icon {
-  cursor: pointer;
-  font-size: 3rem;
-  color: #f3f3f3;
+.card__fav-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2rem;
 }
 .card__link, .card__link:link, .card__link:active {
   color: #000;
@@ -338,9 +335,18 @@ body {
   object-fit: cover;
   object-position: center center;
 }
+.recipe__title {
+  margin-top: 2rem;
+  display: flex;
+}
 .recipe__name {
   color: #55a630;
-  margin-top: 2rem;
+  margin-right: 1rem;
+}
+.recipe__fav-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .recipe__summary {
   margin-top: 2rem;
@@ -554,6 +560,49 @@ body {
   justify-content: flex-end;
 }
 
+.fav-card {
+  position: relative;
+}
+.fav-card__fav-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2rem;
+}
+.fav-card__link, .fav-card__link:link, .fav-card__link:visited {
+  text-decoration: none;
+}
+.fav-card__link:hover .fav-card__recipe-title {
+  color: #bc6c25;
+}
+.fav-card__img-container {
+  width: 100%;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+.fav-card__img {
+  display: block;
+  width: 100%;
+}
+.fav-card__recipe-title {
+  font-size: 2rem;
+  color: #55a630;
+  margin-top: 1rem;
+}
+
+.fav__toggle {
+  display: none;
+}
+.fav__icon {
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+.fav__icon--fav {
+  color: #ae2012;
+}
+.fav__icon--unfav {
+  color: #e5e5e5;
+}
+
 .nav {
   width: 100%;
   display: flex;
@@ -599,14 +648,15 @@ body {
 
 .home-container {
   width: 70%;
-  margin-top: 10%;
+  margin-top: 8%;
 }
 
 .app-text {
-  margin-bottom: 8rem;
+  margin-bottom: 6rem;
 }
 .app-text__heading {
   line-height: 1;
+  color: #fff;
 }
 .app-text__period {
   color: #bc6c25;
@@ -622,6 +672,16 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 2rem;
+}
+
+.account__section-title {
+  margin-bottom: 4rem;
+  font-size: 4rem;
+}
+.account__favorite-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 4rem;
 }
 
 /*# sourceMappingURL=style.css.map */

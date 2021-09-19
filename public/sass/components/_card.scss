@@ -8,19 +8,17 @@
 
     &:hover {
         background-color: rgba($color-primary, 0.25);
+
+        .card__title {
+            color: $color-highlight;
+        }
     }
 
-    &__fav-btn {
+    &__fav-box {
         position: absolute;
-        top: 0rem;
-        right: 0rem;
+        top: 0;
+        right: 0;
         padding: 2rem;
-    }
-
-    &__fav-icon {
-        cursor: pointer;
-        font-size: 3rem;
-        color: $color-grey;
     }
 
     &__link {
@@ -28,17 +26,7 @@
         &:link,
         &:active {
             color: $color-black;
-            // display: grid;
-            // grid-template-columns: min-content 1fr;
-            // column-gap: $grid-gap-xs;
-            // align-items: center;
             text-decoration: none;
-
-            // @media only screen and (max-width: $bp-md) {
-            //     display: flex;
-            //     flex-direction: column;
-            //     align-items: flex-start;
-            // }
         }
     }
 
@@ -46,18 +34,6 @@
         width: 100%;
         height: calc(#{$image-width} * 9 / 16);
         overflow: hidden;
-
-        // @media only screen and (max-width: $bp-lg) {
-        //     width: 8rem;
-        //     height: 8rem;
-        // }
-
-        // @media only screen and (max-width: $bp-md) {
-        //     width: 100%;
-        //     height: auto;
-        //     object-fit: cover;
-        //     margin-bottom: $margin-xs;
-        // }
     }
 
     &__img {
@@ -82,10 +58,6 @@
         grid-template-columns: max-content minmax(1rem, 1fr) max-content;
         // column-gap: $grid-gap-md;
         row-gap: $grid-gap-xs;
-
-        // @media only screen and (max-width: $bp-sm) {
-        //     column-gap: $grid-gap-xs;
-        // }
     }
     &__nutrition-item {
         font-size: 1.4rem;
@@ -96,8 +68,4 @@
             grid-column: 3/4;
         }
     }
-
-    // &__selected {
-    //     border: 2px solid $color-primary;
-    // }
 }

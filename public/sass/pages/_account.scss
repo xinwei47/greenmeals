@@ -1,0 +1,17 @@
+.account {
+
+    &__section {
+
+    }
+
+    &__section-title {
+        margin-bottom: $margin-md;
+        font-size: 4rem;
+    }
+
+    &__favorite-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        grid-gap: $grid-gap-sm;
+    }
+}

@@ -9,7 +9,22 @@
         <div class="recipe__img-container">
             <img src=<%= recipe.image %> alt="" class="recipe__img">
         </div>
-        <h2 class="recipe__name heading--2"><%= recipe.title %> </h2>
+
+        <div class="recipe__title">
+            <h2 class="recipe__name heading--2"><%= recipe.title %> </h2>
+            <!-- add fav icon -->
+            <div class="recipe__fav-box">
+                <% if(currentUser) { %>
+                <% if(favRecipesIdArr.find(arr => arr.includes(recipe.id))) { %>
+                <%- include('../partials/unfavform', {id: favRecipesIdArr.find(arr => arr.includes(recipe.id))[1], ind:1}) %>
+                <% } else { %>
+                <%- include('../partials/favform', {recipe, ind:1}) %>
+                <% } %>
+                <% } %>
+            </div>
+            <!-- fav icon ends -->
+        </div>
+
         <p class="recipe__summary"><%- recipe.summary ? recipe.summary : '' %> </p>
         <div class="recipe__stats-container">
             <div class="recipe__stats">
@@ -117,7 +132,7 @@
                 <div class="starability-result review__rating" data-rating=<%= review.rating %>>Rating:
                     <%= review.rating %> stars
                 </div>
-                <div class="review__author">by <%= review.author.username %></div>
+                <div class="review__author">by <%= review.author ? review.author.username : 'Anonymous' %></div>
                 <div class="review__text"><%= review.text %></div>
 
                 <!-- display delete button if the loggin user is the author -->
@@ -129,11 +144,8 @@
                     </div>
                 </form>
                 <% } %>
-
             </div>
             <% }) %>
-
         </div>
-
     </div>
 </div>

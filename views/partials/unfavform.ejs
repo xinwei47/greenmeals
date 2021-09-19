@@ -1,0 +1,7 @@
+<form action="/account/favorites/<%= id %>?_method=DELETE" class="fav" method="POST">
+    <input type="checkbox" name="fav" id="fav-toggle-<%= ind %>" class="fav__toggle" onchange="this.form.submit()"
+        checked>
+    <label for="fav-toggle-<%= ind %>" class="fav__label">
+        <div class="fav__btn"><i class="fav__icon fav__icon--fav fas fa-heart"></i></div>
+    </label>
+</form>

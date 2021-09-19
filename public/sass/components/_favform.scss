@@ -1,0 +1,19 @@
+.fav {
+
+    &__toggle {
+        display: none;
+    }
+
+    &__icon {
+        font-size: 2.4rem;
+        cursor: pointer;
+        
+        &--fav {
+            color: $color-red;
+        }
+
+        &--unfav {
+            color: $color-grey-dark;
+        }
+    }
+}
