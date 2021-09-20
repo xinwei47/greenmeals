@@ -31,7 +31,7 @@ export const fetchResults = async (req, res, next) => {
 
     // pass favorite recipes to client if there are any
     let favRecipesIdArr;
-    if (req.user) {
+    if (req.isAuthenticated()) {
         // const user = await User.findById(req.user._id).populate({ path: 'Recipes' }); // not working
         const user = await User.findById(req.user._id).populate('recipes');
         favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
@@ -64,7 +64,7 @@ export const fetchRecipe = async (req, res, next) => {
     const reviews = await Review.find({ recipeId }).populate('author');
 
     let favRecipesIdArr;
-    if (req.user) {
+    if (req.isAuthenticated()) {
         const user = await User.findById(req.user._id).populate('recipes');
         favRecipesIdArr = user.recipes.map(recipe => [recipe.recipeId, recipe._id]);
     }

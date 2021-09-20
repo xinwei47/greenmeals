@@ -34,9 +34,6 @@ export const renderLogin = (req, res) => {
 // log user in
 export const loginUser = (req, res) => {
     req.flash('success', 'Welcome back');
-    // where to place req.session.returnTo = req.originalUrl?
-    // req.session.returnTo = req.originalUrl;
-    // console.log(req.session.returnTo);
     const redirectUrl = req.session.returnTo || '/'
     delete req.session.returnTo; // remove the returnTo link from the 'session' object
     res.redirect(redirectUrl);

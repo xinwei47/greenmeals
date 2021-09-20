@@ -90,7 +90,7 @@ app.use('/', userRoutes);
 // Order matters - code below will only run if the request doesn't match any of the route above
 // app.all means for every request no matter it's get, post, put, or delete
 app.all('*', (req, res, next) => {
-    next(new ExpressError('Page not found', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
+    next(new ExpressError('Oops! Page not found.', 404)); // using class 'ExpressError' to create a new object and pass it into next. Express will know it's an error and pass it to the error handling middleware function
 })
 
 // set up our basic error handler

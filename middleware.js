@@ -1,9 +1,8 @@
 import Review from './models/review.js';
 
-// check if the user is loggin
+// check if the user is logged in
 export const isLoggedIn = (req, res, next) => {
-    // req.session.returnTo = req.originalUrl;
-    // console.log(req.session.returnTo);
+    req.session.returnTo = req.originalUrl;
     if (!req.user) {
         req.flash('error', 'Please login first.');
         return res.redirect(`/login`);

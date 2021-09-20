@@ -13,10 +13,14 @@
         align-items: flex-start;
         background: linear-gradient(45deg, $color-primary, $color-secondary);
         padding: $padding-sm $padding-md $padding-xs $padding-md;
+
+        display: grid;
+        grid-template-columns: min-content minmax(1rem, 0.1fr) minmax(min-content, 0.8fr) minmax(1rem, 0.1fr) min-content;
     }
 
     // nav logo
     &__logo {
+        // margin-right: $margin-md;
         transform: translateY(6px);
     }
 
@@ -25,12 +29,17 @@
         transform: translateY(1rem);
         list-style: none;
         display: flex;
-        margin-left: $margin-md;
+
+        grid-column: 5/6;
     }
 
     &__item {
         &:not(:last-child) {
             margin-right: $margin-md;
+
+            @media only screen and (max-width: $bp-xs) {
+                margin-right: $margin-sm;
+            }
         }
     }
 

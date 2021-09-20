@@ -24,6 +24,5 @@ if (favorite) {
 
 const management = document.querySelector('#management');
 if (management) {
-    console.log(management)
     addClass(management.parentNode, 'selected');
 }

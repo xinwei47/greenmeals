@@ -14,17 +14,18 @@
         object-position: center center;
     }
 
-    &__title{
+    &__title {
         margin-top: $margin-sm;
         display: flex;
     }
 
     &__name {
+        font-size: 3.2rem;
         color: $color-primary;
         margin-right: $margin-xs;
     }
-    
-    &__fav-box{
+
+    &__fav-box {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -55,15 +56,18 @@
         grid-template-columns: repeat(3, 1fr);
         justify-items: center;
     }
+
     &__stats {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     &__stats-icon {
         color: $color-primary;
         font-size: 2.4rem;
     }
+
     &__stats-heading {
         font-weight: 600;
         margin-top: $margin-xs;
@@ -77,14 +81,8 @@
 
     &__ingredients-list {
         margin-top: $margin-sm;
-
         column-count: 2;
         column-gap: 4rem;
-
-        @media only screen and (max-width: $bp-xxs) {
-            column-count: 1;
-            column-gap: 0rem;
-        }
     }
 
     // instructions
