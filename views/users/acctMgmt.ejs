@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate') %>
+<%- include('../partials/acctMenu', {keyWordFav: '', keyWordMgmt}) %>
+
+
+<div class="account__section account__management" id="account-management">
+    <!-- users can change password  -->
+    <h3 class="account__todo-heading heading--3">Change Password</h3>
+    <form action="/account/change-password?_method=PUT" class="form account__form" method="POST">
+        <div class="form__group">
+            <label for="original-password" class="form__label">Original Password</label>
+            <input type="password" class="form__input" id="original-password" name="originalPassword">
+        </div>
+        <div class="form__group">
+            <label for="new-password" class="form__label">New Password</label>
+            <input type="password" class="form__input" id="new-password" name="newPassword">
+        </div>
+        <div class="form__group">
+            <label for="confirm-new-password" class="form__label">Confirm New
+                Password</label>
+            <input type="password" class="form__input" id="confirm-new-password" name="confirmNewPassword">
+        </div>
+        <input class="btn-primary" type="submit" value="Change Password">
+    </form>
+
+    <!-- users can delete account -->
+    <h3 class="account__todo-heading heading--3">Delete Account</h3>
+    <form action="/account?_method=DELETE" class="form account__form" method="POST">
+        <div class="form__group form__group--checkbox">
+            <input type="checkbox" class="form__input" id="disclaimer">
+            <label for="disclaimer" class="form__label">By checking this box, you understand that once you delete
+                your account, there is no going back. Please be certain.</label>
+        </div>
+        <input class="btn-primary--error" type="submit" value="Delete Your Account">
+    </form>
+</div>

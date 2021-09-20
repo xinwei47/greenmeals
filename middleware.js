@@ -15,7 +15,7 @@ export const isLoggedIn = (req, res, next) => {
 export const isReviewAuthor = async (req, res, next) => {
     const { id: recipeId, reviewId } = req.params;
     const review = await Review.findById(reviewId).populate({ path: 'author' })
-    if (!req.user.username == review.author.username) {
+    if (!req.user.username === review.author.username) {
         req.flash('error', 'You are not authorized to do that.')
         return res.redirect(`/recipes/${recipeId}`)
     }

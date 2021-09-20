@@ -12,4 +12,18 @@ const flashBtnClose = document.querySelector('.flash__btn');
 advancedToggle.addEventListener('click', () => toggleClass(advancedSearchBlock, 'hidden'));
 
 // flash btn to close the flash block
-flashBtnClose.addEventListener('click', () => addClass(flash, 'hidden'));
+if (flashBtnClose) {
+    flashBtnClose.addEventListener('click', () => addClass(flash, 'hidden'));
+};
+
+// add styling to selected menu item
+const favorite = document.querySelector('#favorites');
+if (favorite) {
+    addClass(favorite.parentNode, 'selected');
+}
+
+const management = document.querySelector('#management');
+if (management) {
+    console.log(management)
+    addClass(management.parentNode, 'selected');
+}

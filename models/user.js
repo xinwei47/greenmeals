@@ -15,8 +15,8 @@ const userSchema = new Schema({
 })
 
 // Instead of adding the password directly to the schema, add on the password package to the userSchema
-// Passport-Local Mongoose will add a username, hash and salt field to store the username, the hashed password and the salt value.
-// Passport-Local Mongoose also add some static methods to the model (i.e. User.authenticate(), User.register())
+// Passport-Local-Mongoose will add a username, hash and salt field to store the username, the hashed password and the salt value.
+// Passport-Local-Mongoose also add some static methods to the model (i.e. User.authenticate(), User.register())
 userSchema.plugin(passportLocalMongoose);
 
 export default mongoose.model('User', userSchema);

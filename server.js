@@ -13,10 +13,8 @@ import ExpressError from './utilities/ExpressError.js';
 import userRoutes from './routes/usersRoutes.js';
 import recipesRoutes from './routes/recipesRoutes.js';
 import reviewRoutes from './routes/reviewsRoutes.js';
-import accountRoutes from './routes/accountRoutes.js';
 
 import User from './models/user.js';
-import Recipe from './models/recipe.js'
 
 dotenv.config();
 connectDB(); // connect to mongoDB
@@ -85,7 +83,6 @@ app.get('/', (req, res) => {
 // routes
 app.use('/recipes/:id/reviews', reviewRoutes);
 app.use('/recipes', recipesRoutes);
-app.use('/account', accountRoutes);
 app.use('/', userRoutes);
 
 

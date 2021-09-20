@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import Recipe from '../models/recipe.js';
 
 // render register page
 export const renderRegister = (req, res) => {
@@ -16,7 +17,7 @@ export const registerUser = async (req, res, next) => {
     if (password === confirmPassword) {
         const registerUser = await User.register(user, password)
         req.login(registerUser, err => {
-            req.flash('success', 'register successfully');
+            req.flash('success', 'You have registered successfully.');
             res.redirect('/');
         })
     } else {
@@ -41,10 +42,64 @@ export const loginUser = (req, res) => {
     res.redirect(redirectUrl);
 }
 
-
 // log user out
 export const logoutUser = (req, res) => {
     req.logout();
     req.flash('success', 'Goodbye!');
     res.redirect('/');
 }
+
+// get user account management page
+export const getAcctMgmt = (req, res) => {
+    const keyWordMgmt = req.url.split('/')[2];
+    res.render('users/acctMgmt', { keyWordMgmt });
+}
+
+// get user favorites page
+export const getFavorites = async (req, res, next) => {
+    const keyWordFav = req.url.split('/')[2];
+    const user = await User.findById(req.user._id).populate('recipes');
+    const userFavoriteRecipes = user.recipes;
+    res.render('users/acctFavorites', { userFavoriteRecipes, keyWordFav });
+}
+
+// save favorite recipes
+export const postFavorite = async (req, res, next) => {
+    // save recipe information to MongoDB
+    // display saved recipes as cards on user's account page
+    const favRecipe = await new Recipe(req.query);
+    const user = await User.findById(req.user._id).populate('recipes');
+    user.recipes.push(favRecipe);
+
+    await favRecipe.save();
+    await user.save();
+
+    res.redirect('/account/favorites')
+}
+
+
+export const deleteFavorite = async (req, res) => {
+    const unfavRecipe = await Recipe.findById(req.params.id)
+    await User.findByIdAndUpdate(req.user._id, { $pull: { recipes: unfavRecipe._id } })
+    res.redirect('/account/favorites')
+}
+
+
+export const updatePassword = async (req, res, next) => {
+    const user = await User.findById(req.user._id);
+    const { originalPassword, newPassword, confirmNewPassword } = req.body;
+    if (newPassword === confirmNewPassword) {
+        await user.changePassword(originalPassword, newPassword);
+        req.flash('success', 'Password changed successfully!')
+    } else {
+        req.flash('error', 'Password does not match!')
+    }
+    res.redirect('/account/management');
+}
+
+export const deleteUser = async (req, res, next) => {
+    await User.findByIdAndDelete(req.user._id);
+    req.flash('success', 'Account deleted successfully!')
+    res.redirect('/');
+}
+

@@ -103,10 +103,10 @@ body {
 }
 
 .selected {
-  border: 2px solid #55a630;
+  border-bottom: 3px solid #55a630;
 }
 .selected > a {
-  color: #55a630;
+  color: #55a630 !important;
 }
 
 .search {
@@ -223,7 +223,8 @@ body {
   align-items: start;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-primary--error {
   display: inline-block;
   font: inherit;
   font-size: 1.6rem;
@@ -232,16 +233,25 @@ body {
   padding: 0.8rem 6rem;
   border: none;
   border-radius: 40px;
-  background: linear-gradient(45deg, #bc6c25, rgba(188, 108, 37, 0.9));
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary--error:hover {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   transform: translateY(-4px);
 }
-.btn-primary:active {
+.btn-primary:active,
+.btn-primary--error:active {
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
   transform: translateY(0);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #bc6c25, rgba(188, 108, 37, 0.9));
+}
+
+.btn-primary--error {
+  background: #ae2012;
 }
 
 .btn-back {
@@ -257,6 +267,7 @@ body {
 }
 
 .btn-delete {
+  cursor: pointer;
   background-color: #ae2012;
   border: none;
   padding: 1rem 2rem;
@@ -497,12 +508,19 @@ body {
   display: flex;
   flex-direction: column;
 }
+.form__group--checkbox {
+  display: block;
+}
+.form__group--checkbox > input {
+  margin-right: 1rem;
+}
 .form__group:not(:last-child) {
   margin-bottom: 2rem;
 }
 .form__label {
   font-weight: 600;
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 .form__input {
   font-family: inherit;
@@ -674,6 +692,27 @@ body {
   gap: 2rem;
 }
 
+.account__menu-list {
+  list-style-type: none;
+  display: flex;
+}
+.account__menu-item {
+  padding: 0 0 1rem 0;
+}
+.account__menu-item:not(:first-of-type) {
+  margin-left: 4rem;
+}
+.account__menu-link, .account__menu-link:link, .account__menu-link:visited {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+.account__menu-link:hover {
+  color: #55a630;
+}
+.account__section {
+  margin-top: 4rem;
+}
 .account__section-title {
   margin-bottom: 4rem;
   font-size: 4rem;
@@ -682,6 +721,17 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-gap: 4rem;
+}
+.account__todo-heading {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem 0;
+}
+.account__todo-heading:not(:first-of-type) {
+  margin-top: 6rem;
+}
+.account__form {
+  margin-top: 4rem;
+  margin-left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

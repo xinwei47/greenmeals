@@ -1,9 +1,18 @@
 .form {
     width: 60%;
     margin: auto;
+    
     &__group {
         display: flex;
         flex-direction: column;
+
+        &--checkbox{
+            display: block;
+
+            & > input {
+                margin-right: $margin-xs;
+            }
+        }
 
         &:not(:last-child) {
             margin-bottom: $margin-sm;
@@ -13,6 +22,7 @@
     &__label {
         font-weight: 600;
         margin-bottom: $margin-xs;
+        line-height: 1.4;
     }
 
     &__input {

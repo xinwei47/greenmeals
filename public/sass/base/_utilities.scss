@@ -24,9 +24,9 @@
 }
 
 .selected {
-    border: 2px solid $color-primary;
+    border-bottom: 3px solid #55a630;
 
     & > a {
-        color: $color-primary;
+        color: $color-primary !important;
     }
 }

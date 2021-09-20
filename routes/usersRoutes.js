@@ -1,7 +1,8 @@
 import express from "express";
-import { renderRegister, registerUser, renderLogin, loginUser, logoutUser } from '../controllers/usersControllers.js';
 import passport from 'passport';
+import { renderRegister, registerUser, renderLogin, loginUser, logoutUser, getFavorites, postFavorite, getAcctMgmt, deleteFavorite, updatePassword, deleteUser } from '../controllers/usersControllers.js';
 import catchAsyncError from '../utilities/catchAsyncError.js';
+import { isLoggedIn } from '../middleware.js';
 
 const router = express.Router();
 
@@ -17,5 +18,22 @@ router.route('/login')
 router.route('/logout')
     .get(logoutUser)
 
+
+// account routes
+router.route('/account')
+    .delete(isLoggedIn, catchAsyncError(deleteUser))
+
+router.route('/account/favorites')
+    .get(isLoggedIn, catchAsyncError(getFavorites))
+    .post(isLoggedIn, catchAsyncError(postFavorite))
+
+router.route('/account/management')
+    .get(isLoggedIn, getAcctMgmt)
+
+router.route('/account/favorites/:id')
+    .delete(isLoggedIn, catchAsyncError(deleteFavorite))
+
+router.route('/account/change-password')
+    .put(isLoggedIn, catchAsyncError(updatePassword))
 
 export default router;

@@ -24,7 +24,7 @@ export const fetchResults = async (req, res, next) => {
             ...(minProtein ? { minProtein } : {}),
             ...(maxProtein ? { maxProtein } : {}),
             addRecipeNutrition: true,
-            number: 21
+            number: 50
         }
     })
     const searchResults = response.data.results;
