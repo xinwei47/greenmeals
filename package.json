@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node server.js",
     "watch:sass": "sass public/sass/main.scss public/css/style.css -w",
     "server:js": "nodemon server.js",
     "dev": "npm-run-all --parallel watch:sass server:js",
