@@ -65,24 +65,28 @@ export const postFavorite = async (req, res, next) => {
   // save recipe information to MongoDB
   // display saved recipes as cards on user's account page
   const { recipeId } = req.query;
-  const favCheck = await Recipe.findOne({ recipeId });
-  //   console.log(!!favCheck);
-  // check if the recipe is already in faviorites
-  if (!!favCheck) {
-    // res.send('Recipe is already in favorites.');
-    req.flash('error', 'Recipe is already in favorites.');
+  const user = await User.findById(req.user._id).populate('recipes');
+
+  // check if the recipe is already in recipes database
+  const recipeCheck = await Recipe.findOne({ recipeId });
+
+  if (recipeCheck) {
+    const favCheck = user.recipes.find(
+      (recipe) => recipe.recipeId === recipeCheck.recipeId
+    );
+    if (favCheck) {
+      req.flash('error', 'Recipe already in favorites!');
+    } else {
+      user.recipes.push(recipeCheck);
+    }
   } else {
     const favRecipe = await new Recipe(req.query);
-    const user = await User.findById(req.user._id).populate('recipes');
     user.recipes.push(favRecipe);
-
     await favRecipe.save();
-    await user.save();
-
-    req.flash('success', 'Added to Favirotes Successfully!');
-    res.redirect('/account/favorites');
-    // res.status(204).send();
   }
+  await user.save();
+  req.flash('success', 'Added to Favirotes Successfully!');
+  res.redirect('/account/favorites');
 };
 
 export const deleteFavorite = async (req, res) => {

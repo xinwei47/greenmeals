@@ -543,6 +543,7 @@ body {
 
 .fav-card {
   position: relative;
+  max-width: 35rem;
 }
 .fav-card__fav-box {
   position: absolute;
