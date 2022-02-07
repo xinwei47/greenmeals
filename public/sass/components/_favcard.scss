@@ -1,6 +1,9 @@
 .fav-card {
   position: relative;
-  max-width: 35rem;
+
+  @media only screen and (min-width: $bp-xs) {
+    max-width: 35rem;
+  }
 
   &__fav-box {
     position: absolute;
