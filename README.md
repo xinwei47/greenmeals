@@ -5,7 +5,7 @@ GreenMeals is a recipe app which allows user to search healthy recipes by ingred
 
 **Technology used:** API, Javascript, MongoDB, Express, node.js, Sass, HTML
 
-**Visit site:**
+**Visit site:** https://greenmeals.herokuapp.com/
 
 ## Features
 - Search recipes by ingredients
