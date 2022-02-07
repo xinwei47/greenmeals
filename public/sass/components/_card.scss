@@ -1,70 +1,70 @@
 .card {
-    background-color: rgba($color-primary, 0.2);
-    position: relative;
+  background-color: rgba($color-primary, 0.2);
+  position: relative;
+  list-style: none;
+  outline: 1px solid rgba($color-secondary, 0.4);
+  box-shadow: $box-shadow-2;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.25);
+
+    .card__title {
+      color: $color-highlight;
+    }
+  }
+
+  &__fav-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2rem;
+  }
+
+  &__link {
+    &,
+    &:link,
+    &:active {
+      color: $color-black;
+      text-decoration: none;
+    }
+  }
+
+  &__img-container {
+    width: 100%;
+    height: calc(#{$image-width} * 9 / 16);
+    overflow: hidden;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: $padding-sm $padding-md;
+  }
+
+  &__title {
+    color: $color-primary;
+  }
+
+  &__nutrition-overview {
+    margin-top: $margin-sm;
     list-style: none;
-    outline: 1px solid rgba($color-secondary, 0.4);
-    box-shadow: $box-shadow-2;
-    transition: all 0.2s;
+    display: grid;
+    grid-template-columns: max-content minmax(1rem, 1fr) max-content;
+    row-gap: $grid-gap-xs;
+  }
+  &__nutrition-item {
+    font-size: 1.4rem;
+    font-weight: 500;
 
-    &:hover {
-        background-color: rgba($color-primary, 0.25);
-
-        .card__title {
-            color: $color-highlight;
-        }
+    &:nth-child(2),
+    &:last-child {
+      grid-column: 3/4;
     }
-
-    &__fav-box {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 2rem;
-    }
-
-    &__link {
-        &,
-        &:link,
-        &:active {
-            color: $color-black;
-            text-decoration: none;
-        }
-    }
-
-    &__img-container {
-        width: 100%;
-        height: calc(#{$image-width} * 9 / 16);
-        overflow: hidden;
-    }
-
-    &__img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    &__content {
-        padding: $padding-sm $padding-md;
-    }
-
-    &__title {
-        color: $color-primary;
-    }
-
-    &__nutrition-overview {
-        margin-top: $margin-sm;
-        list-style: none;
-        display: grid;
-        grid-template-columns: max-content minmax(1rem, 1fr) max-content;
-        row-gap: $grid-gap-xs;
-    }
-    &__nutrition-item {
-        font-size: 1.4rem;
-        font-weight: 500;
-
-        &:nth-child(2),
-        &:last-child {
-            grid-column: 3/4;
-        }
-    }
+  }
 }

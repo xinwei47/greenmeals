@@ -1,62 +1,61 @@
 .account {
-
-    &__menu {
-        // margin: $margin-md 0;
-        // margin: 0 $margin-sm $margin-md 0;
-        &-list {
-            list-style-type: none;
-            display: flex;
-        }
-
-        &-item {
-            padding: 0 0 $padding-xs 0;
-            // border-bottom: 3px solid $color-primary;
-
-            &:not(:first-of-type) {
-                margin-left: $padding-md;
-            }
-        }
-        
-        &-link {
-            &,
-            &:link,
-            &:visited {
-                text-decoration: none;
-                color: $color-black;
-                font-weight: 600;
-            }
-
-            &:hover {
-                color: $color-primary;
-            }
-        }
+  &__menu {
+    // margin: $margin-md 0;
+    // margin: 0 $margin-sm $margin-md 0;
+    &-list {
+      list-style-type: none;
+      display: flex;
     }
 
-    &__section {
-        margin-top: $margin-md;
+    &-item {
+      padding: 0 0 $padding-xs 0;
+      // border-bottom: 3px solid $color-primary;
+
+      &:not(:first-of-type) {
+        margin-left: $padding-md;
+      }
     }
 
-    &__section-title {
-        margin-bottom: $margin-md;
-        font-size: 4rem;
-    }
+    &-link {
+      &,
+      &:link,
+      &:visited {
+        text-decoration: none;
+        color: $color-black;
+        font-weight: 600;
+      }
 
-    &__favorite-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-        grid-gap: $grid-gap-sm;
+      &:hover {
+        color: $color-primary;
+      }
     }
+  }
 
-    &__todo-heading {
-        border-bottom: 1px solid rgba($color-black, .2);
-        padding: $padding-xs 0;
-        &:not(:first-of-type) {
-            margin-top: $margin-md-2;
-        }
+  &__section {
+    margin-top: $margin-md;
+  }
+
+  &__section-title {
+    margin-bottom: $margin-md;
+    font-size: 4rem;
+  }
+
+  &__favorite-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: $grid-gap-sm;
+  }
+
+  &__todo-heading {
+    border-bottom: 1px solid rgba($color-black, 0.2);
+    padding: $padding-xs 0;
+    &:not(:first-of-type) {
+      margin-top: $margin-md-2;
     }
-    
-    &__form {
-        margin-top: $margin-md;
-        margin-left: 0;
-    }
+  }
+
+  &__form {
+    margin-top: $margin-md;
+    margin-left: 0;
+  }
 }
