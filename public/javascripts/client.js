@@ -14,22 +14,6 @@ const flashBtnClose = document.querySelector('.flash__btn');
 advancedToggle.addEventListener('click', () =>
   toggleClass(advancedSearchBlock, 'hidden')
 );
-// close advanced search when clicking outside of the box
-
-// if (advancedSearchBlock) {
-// window.addEventListener('click', (event) => {
-//   //   const clickedOnOutside = !advancedSearchBlock.contains(event.target);
-//   //   const closeAdvancedSearch =
-//   //     advancedSearchBlock && !advancedSearchBlock.contains('hidden');
-//   if (
-//     advancedSearchBlock &&
-//     !advancedSearchBlock.classList.contains('hidden') &&
-//     !advancedSearchBlock.contains(event.target)
-//   ) {
-//     addClass(advancedSearchBlock, 'hidden');
-//   }
-// });
-// }
 
 // show "min" and "max" annotation
 const labelMin = document.querySelector('.search__label-icon--min');
