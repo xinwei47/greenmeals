@@ -1,59 +1,68 @@
 .nav {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding-sm $padding-md;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  &-page {
+    align-items: flex-start;
+    background: linear-gradient(45deg, $color-primary, $color-secondary);
+    padding: $padding-sm $padding-md $padding-xs $padding-md;
+
+    display: grid;
+    grid-template-columns: min-content minmax(1rem, 0.1fr) minmax(
+        min-content,
+        0.8fr
+      ) minmax(1rem, 0.1fr) min-content;
+  }
+
+  // nav logo
+  &__logo {
+    // margin-right: $margin-md;
+    transform: translateY(6px);
+  }
+
+  // nav menu
+  &__menu {
+    transform: translateY(1rem);
+    list-style: none;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: $padding-sm $padding-md;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
 
-    &-page {
-        align-items: flex-start;
-        background: linear-gradient(45deg, $color-primary, $color-secondary);
-        padding: $padding-sm $padding-md $padding-xs $padding-md;
+    grid-column: 5/6;
+  }
 
-        display: grid;
-        grid-template-columns: min-content minmax(1rem, 0.1fr) minmax(min-content, 0.8fr) minmax(1rem, 0.1fr) min-content;
+  &__item {
+    &:not(:last-child) {
+      margin-right: $margin-md;
+
+      @media only screen and (max-width: $bp-xs) {
+        margin-right: $margin-sm;
+      }
+    }
+  }
+
+  &__link {
+    &,
+    &:link,
+    &:visited {
+      text-decoration: none;
+      color: $color-black;
+      font-weight: 500;
     }
 
-    // nav logo
-    &__logo {
-        // margin-right: $margin-md;
-        transform: translateY(6px);
+    &:hover {
+      color: $color-highlight;
     }
+  }
 
-    // nav menu
-    &__menu {
-        transform: translateY(1rem);
-        list-style: none;
-        display: flex;
-
-        grid-column: 5/6;
-    }
-
-    &__item {
-        &:not(:last-child) {
-            margin-right: $margin-md;
-
-            @media only screen and (max-width: $bp-xs) {
-                margin-right: $margin-sm;
-            }
-        }
-    }
-
-    &__link {
-        &,
-        &:link,
-        &:visited {
-            text-decoration: none;
-            color: $color-black;
-            font-weight: 500;
-        }
-
-        &:hover {
-            color: $color-highlight;
-        }
-    }
+  // nav advanced search bar
+  & > form > div:nth-of-type(2) {
+    position: absolute;
+    top: 85%;
+  }
 }

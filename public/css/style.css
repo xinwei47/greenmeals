@@ -170,16 +170,15 @@ body {
   grid-template-columns: min-content repeat(2, 1fr);
   align-items: center;
   gap: 2rem;
-  position: absolute;
-  width: 80vw;
-  top: 85%;
+  width: 90vw;
+  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
 }
 .search__label {
   font-size: 1.6rem;
   font-weight: 600;
 }
 .search__advanced-input {
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
 }
 .search__ingredients-input {
   grid-column: 2/4;
@@ -635,6 +634,10 @@ body {
 }
 .nav__link:hover {
   color: #bc6c25;
+}
+.nav > form > div:nth-of-type(2) {
+  position: absolute;
+  top: 85%;
 }
 
 .content-container {

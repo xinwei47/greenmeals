@@ -85,10 +85,8 @@
     grid-template-columns: min-content repeat(2, 1fr);
     align-items: center;
     gap: $grid-gap-xs;
-
-    position: absolute;
-    width: 80vw;
-    top: 85%;
+    width: 90vw;
+    box-shadow: $box-shadow;
   }
   &__label {
     font-size: 1.6rem;
@@ -96,7 +94,8 @@
   }
 
   &__advanced-input {
-    box-shadow: $box-shadow-2;
+    // box-shadow: $box-shadow-2;
+    border: 1px solid $color-grey-dark;
   }
 
   &__ingredients-input {
