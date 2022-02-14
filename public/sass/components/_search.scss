@@ -87,6 +87,7 @@
     gap: $grid-gap-xs;
     width: 90vw;
     box-shadow: $box-shadow;
+    position: relative;
   }
   &__label {
     font-size: 1.6rem;
@@ -94,7 +95,6 @@
   }
 
   &__advanced-input {
-    // box-shadow: $box-shadow-2;
     border: 1px solid $color-grey-dark;
   }
 

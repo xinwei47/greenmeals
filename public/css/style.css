@@ -172,6 +172,7 @@ body {
   gap: 2rem;
   width: 90vw;
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
+  position: relative;
 }
 .search__label {
   font-size: 1.6rem;
