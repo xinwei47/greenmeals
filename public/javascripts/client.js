@@ -1,7 +1,9 @@
 // hide element
-const toggleClass = (element, className = '') => element.classList.toggle(className);
+const toggleClass = (element, className = '') =>
+  element.classList.toggle(className);
 const addClass = (element, className = '') => element.classList.add(className);
-const removeClass = (element, className = '') => element.classList.remove(className);
+const removeClass = (element, className = '') =>
+  element.classList.remove(className);
 
 const advancedToggle = document.querySelector('.search__advanced-toggle');
 const advancedSearchBlock = document.querySelector('.search__advanced');
@@ -9,7 +11,25 @@ const flash = document.querySelector('.flash');
 const flashBtnClose = document.querySelector('.flash__btn');
 
 // advanced search button to toggle the additional criteria
-advancedToggle.addEventListener('click', () => toggleClass(advancedSearchBlock, 'hidden'));
+advancedToggle.addEventListener('click', () =>
+  toggleClass(advancedSearchBlock, 'hidden')
+);
+// close advanced search when clicking outside of the box
+
+// if (advancedSearchBlock) {
+// window.addEventListener('click', (event) => {
+//   //   const clickedOnOutside = !advancedSearchBlock.contains(event.target);
+//   //   const closeAdvancedSearch =
+//   //     advancedSearchBlock && !advancedSearchBlock.contains('hidden');
+//   if (
+//     advancedSearchBlock &&
+//     !advancedSearchBlock.classList.contains('hidden') &&
+//     !advancedSearchBlock.contains(event.target)
+//   ) {
+//     addClass(advancedSearchBlock, 'hidden');
+//   }
+// });
+// }
 
 // show "min" and "max" annotation
 const labelMin = document.querySelector('.search__label-icon--min');
@@ -18,27 +38,27 @@ const annotationMin = document.querySelector('.search__annotation-box--min');
 const annotationMax = document.querySelector('.search__annotation-box--max');
 
 labelMin.addEventListener('click', () => {
-    toggleClass(annotationMin, 'hidden');
-    addClass(annotationMax, 'hidden');
+  toggleClass(annotationMin, 'hidden');
+  addClass(annotationMax, 'hidden');
 });
 
 labelMax.addEventListener('click', () => {
-    toggleClass(annotationMax, 'hidden');
-    addClass(annotationMin, 'hidden');
+  toggleClass(annotationMax, 'hidden');
+  addClass(annotationMin, 'hidden');
 });
 
 // flash btn to close the flash block
 if (flashBtnClose) {
-    flashBtnClose.addEventListener('click', () => addClass(flash, 'hidden'));
-};
+  flashBtnClose.addEventListener('click', () => addClass(flash, 'hidden'));
+}
 
 // add styling to selected menu item
 const favorite = document.querySelector('#favorites');
 if (favorite) {
-    addClass(favorite.parentNode, 'selected');
+  addClass(favorite.parentNode, 'selected');
 }
 
 const management = document.querySelector('#management');
 if (management) {
-    addClass(management.parentNode, 'selected');
+  addClass(management.parentNode, 'selected');
 }

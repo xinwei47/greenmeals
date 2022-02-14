@@ -1,52 +1,121 @@
 <form action="/recipes" method="POST" class="search center-content--column">
-    <!-- search box -->
-    <div class="search__basic">
-        <div class="search__input-box">
-            <input type="text" class="search__input search__basic-input" id="search-input" placeholder="Search recipes"
-                name="searchString">
+  <!-- search box -->
+  <div class="search__basic">
+    <div class="search__input-box">
+      <input
+        type="text"
+        class="search__input search__basic-input"
+        id="search-input"
+        placeholder="Search recipes"
+        name="searchString"
+      />
 
-            <!-- search button -->
-            <button class="search__btn-box"><i class="search__icon fas fa-search"></i></button>
-        </div>
-        <a href="#" class="search__advanced-toggle center-element">Advanced Search</a>
+      <!-- search button -->
+      <button class="search__btn-box">
+        <i class="search__icon fas fa-search"></i>
+      </button>
     </div>
+    <a href="#" class="search__advanced-toggle center-element"
+      >Advanced Search</a
+    >
+  </div>
 
-    <!-- advanced search link -->
-    <div class="search__advanced hidden">
-        <label for="ingredients" class="search__label">Ingredients</label>
-        <input type="text" class="search__input search__advanced-input search__ingredients-input" id="ingredients"
-            placeholder="Seperate ingredients by comma" name="searchIngredients">
+  <!-- advanced search link -->
+  <div class="search__advanced hidden">
+    <label for="ingredients" class="search__label">Ingredients</label>
+    <input
+      type="text"
+      class="search__input search__advanced-input search__ingredients-input"
+      id="ingredients"
+      placeholder="Seperate ingredients by comma"
+      name="searchIngredients"
+    />
 
-        <div class="search__column search__column--min">
-            <p class="search__label search__min">Min <sup><i
-                        class="search__label-icon search__label-icon--min fas fa-question-circle"></i></sup></p>
-            <div class="search__annotation-box search__annotation-box--min center-element hidden">
-                <p class="search__annotation search__annotation--min">The minimum amount of nutrition in grams
-                    the recipe must have.
-                </p>
-            </div>
-        </div>
-        <div class="search__column search__column--max">
-            <p class="search__label search__max">Max <sup><i
-                        class="search__label-icon search__label-icon--max fas fa-question-circle"></i></sup></p>
-            <div class="search__annotation-box search__annotation-box--max center-element hidden">
-                <p class="search__annotation search__annotation--max">The maximum amount of nutrition in grams
-                    the recipe can have.
-                </p>
-            </div>
-        </div>
-        <p class="search__label">Fat</p>
-        <input type="text" class="search__input search__advanced-input" id="min-fat" name="minFat">
-        <input type="text" class="search__input search__advanced-input" id="max-fat" name="maxFat">
-        <p class="search__label">Calories</p>
-        <input type="text" class="search__input search__advanced-input" id="min-cal" name="minCalories">
-        <input type="text" class="search__input search__advanced-input" id="max-cal" name="maxCalories">
-        <p class="search__label">Carbs</p>
-        <input type="text" class="search__input search__advanced-input" id="min-carbs" name="minCarbs">
-        <input type="text" class="search__input search__advanced-input" id="max-carbs" name="maxCarbs">
-        <p class="search__label">Protein</p>
-        <input type="text" class="search__input search__advanced-input" id="min-protein" name="minProtein">
-        <input type="text" class="search__input search__advanced-input" id="max-protein" name="maxProtein">
+    <div class="search__column search__column--min">
+      <p class="search__label search__min">
+        Min
+        <sup
+          ><i
+            class="search__label-icon search__label-icon--min fas fa-question-circle"
+          ></i
+        ></sup>
+      </p>
+      <div
+        class="search__annotation-box search__annotation-box--min center-element hidden"
+      >
+        <p class="search__annotation search__annotation--min">
+          The minimum amount of nutrition in grams the recipe must have.
+        </p>
+      </div>
     </div>
-
+    <div class="search__column search__column--max">
+      <p class="search__label search__max">
+        Max
+        <sup
+          ><i
+            class="search__label-icon search__label-icon--max fas fa-question-circle"
+          ></i
+        ></sup>
+      </p>
+      <div
+        class="search__annotation-box search__annotation-box--max center-element hidden"
+      >
+        <p class="search__annotation search__annotation--max">
+          The maximum amount of nutrition in grams the recipe can have.
+        </p>
+      </div>
+    </div>
+    <p class="search__label">Fat</p>
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="min-fat"
+      name="minFat"
+    />
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="max-fat"
+      name="maxFat"
+    />
+    <p class="search__label">Calories</p>
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="min-cal"
+      name="minCalories"
+    />
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="max-cal"
+      name="maxCalories"
+    />
+    <p class="search__label">Carbs</p>
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="min-carbs"
+      name="minCarbs"
+    />
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="max-carbs"
+      name="maxCarbs"
+    />
+    <p class="search__label">Protein</p>
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="min-protein"
+      name="minProtein"
+    />
+    <input
+      type="text"
+      class="search__input search__advanced-input"
+      id="max-protein"
+      name="maxProtein"
+    />
+  </div>
 </form>

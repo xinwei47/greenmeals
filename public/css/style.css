@@ -37,6 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 }
 
 body {
@@ -164,12 +165,14 @@ body {
   border-radius: 4px;
   margin: 2rem 0;
   padding: 4rem;
-  width: 100%;
+  width: 100vw;
   display: grid;
   grid-template-columns: min-content repeat(2, 1fr);
   align-items: center;
   gap: 2rem;
-  position: relative;
+  position: absolute;
+  width: 80vw;
+  top: 85%;
 }
 .search__label {
   font-size: 1.6rem;
@@ -465,6 +468,7 @@ body {
 .form {
   width: 60%;
   margin: auto;
+  position: relative;
 }
 .form__group {
   display: flex;

@@ -1,41 +1,48 @@
 <!-- not using boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body class="background-color">
+  <body class="background-color">
     <nav class="nav nav-home">
-        <%- include('partials/logo') %>
-        <%- include('partials/menu') %>
+      <%- include('partials/logo') %> <%- include('partials/menu') %>
     </nav>
 
     <main class="home-container">
-        <%- include('partials/flash') %>
-        <div class="app-text">
-            <h1 class="app-text__heading heading--1">Eat Healthy<span class="app-text__period">.</span><br>Live
-                Well<span class="app-text__period">.</span></h1>
-            <h3 class="app-text__intro heading--3">We provide homemade, simple, & delicious plant-based recipes
-                are designed to provide your body & mind with great fuel for great performance. Enjoy our creations in
-                good health!</h3>
-        </div>
-
-        <%- include('partials/searchbar') %>
-
+      <%- include('partials/flash') %>
+      <div class="app-text">
+        <h1 class="app-text__heading heading--1">
+          Eat Healthy<span class="app-text__period">.</span><br />Live Well<span
+            class="app-text__period"
+            >.</span
+          >
+        </h1>
+        <h3 class="app-text__intro heading--3">
+          We provide homemade, simple, & delicious plant-based recipes are
+          designed to provide your body & mind with great fuel for great
+          performance. Enjoy our creations in good health!
+        </h3>
+      </div>
+      <%- include('partials/searchbar') %>
     </main>
 
     <script src="/javascripts/client.js"></script>
-
-</body>
-
+  </body>
 </html>
